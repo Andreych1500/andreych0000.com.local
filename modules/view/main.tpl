@@ -112,7 +112,6 @@
     });', 1)?>
   </code>
 </section>
-
 <section data-section="2">
   <nav>
     <h2>Добавлення джерела при копіюванні тексту в буфер</h2>
@@ -136,7 +135,6 @@
     ', 1)?>
   </code>
 </section>
-
 <section data-section="3">
   <nav>
     <h2>Кнопка поділитися - "соціальні мережі"</h2>
@@ -262,8 +260,231 @@
       });
     }', 1)?>
   </code>
+</section>
+<section data-section="4">
+  <nav>
+    <h2>Кнопка у Верх</h2>
+    <ul>
+      <li>Tpl</li>
+      <li>Less</li>
+      <li>JS</li>
+    </ul>
+    <div class="num-section">4</div>
+  </nav>
 
-  <code data-type="example">
+  <code data-type="tpl"><?=hc('
+    <div id="scroll-top">
+      <span>›</span>
+    </div>
+    ', 1)?>
+  </code>
 
+  <code data-type="less"><?=hc('
+    #scroll-top {
+      position: fixed;
+      z-index: 1000;
+      bottom: 25px;
+      right: 25px;
+      background-color: #333333;
+      width: 38px;
+      height: 38px;
+      text-align: center;
+      cursor: pointer;
+      color: #ffffff;
+      display: none;
+      .opacity(0.9);
+      .border-radius(8px);
+    
+      &:hover {
+        color: #f27c66;
+      }
+    
+      span {
+        line-height: 30px;
+        font-size: 44px;
+        display: inline-block;
+        left: 8px;
+        top: 3px;
+        position: absolute;
+        .transform(rotate(-90deg));
+        .transition(all 0.3s);
+      }
+    }', 1)?>
+  </code>
+
+  <code data-type="js"><?=hc('
+    scroll_top(); // Виклик
+    
+    function scroll_top() {
+      $("#scroll-top").on("click", function () {
+        $("html, body").animate({scrollTop: 0});
+        return false;
+      });
+      
+      $(window).scroll(function () {
+        if ($(window).scrollTop() > 400) {
+          $("#scroll-top").fadeIn();
+        } else {
+          $("#scroll-top").fadeOut();
+        }
+      });
+      
+      $(window).scroll();
+    }', 1)?>
+  </code>
+</section>
+<section data-section="5">
+  <nav>
+    <h2>Перевірка на включення "Cookie" у користувача</h2>
+    <ul>
+      <li>JS</li>
+    </ul>
+    <div class="num-section">5</div>
+  </nav>
+
+  <code data-type="js"><?=hc('
+    if (!navigator.cookieEnabled) {
+      alert("You have disabled cookies. Several functions may not work intermittently or completely broken. Enable them to improve work!");
+    }', 1)?>
+  </code>
+</section>
+<section data-section="6">
+  <nav>
+    <h2>Перевірка на включення "JavaScript" у браузері</h2>
+    <ul>
+      <li>Tpl</li>
+      <li>Less</li>
+    </ul>
+    <div class="num-section">6</div>
+  </nav>
+
+  <code data-type="tpl"><?=hc('
+    <!-- Вставляємо у body першим елементом -->
+    
+    <noscript>
+      <div class="no-script">
+        <b>JavaScript disabled</b>
+        <hr>
+        <p><i>JavaScript is disabled</i> on your browser. To use The Analytical Scientist please enable JavaScript or
+          upgrade to a JavaScript capable browser. </p>
+      </div>
+    </noscript>
+    ', 1)?>
+  </code>
+
+  <code data-type="less"><?=hc('
+    .no-script {
+      background: #f5fff6;
+      color: #2f363e;
+      text-align: center;
+      font-size: 20px;
+      width: 70%;
+      padding: 10px 15%;
+      margin: 20px 0;
+      font-family: sans-serif;
+      . box-shadow(0 0 10 px 0 gray);
+      
+      b {
+        font-size: 26px;
+        vertical-align: bottom;
+        display: inline-block;
+      }
+      
+      hr {
+        background: #f00;
+        height: 3px;
+      }
+      
+      i {
+        font-weight: 600;
+        color: #ef4533;
+      }
+      
+      p {
+        margin-top: 15px;
+      }
+    }', 1)?>
+  </code>
+</section>
+<section data-section="7">
+  <nav>
+    <h2>Відображення відео через бібліотеку "Video.js"</h2>
+    <ul>
+      <li>Api</li>
+      <li>Tpl</li>
+      <li>Js</li>
+    </ul>
+    <div class="num-section">7</div>
+  </nav>
+
+  <code data-type="api" class="hljs less"><?=hc('
+    API      |   http://docs.videojs.com/docs/guides/api.html
+    Method   |   http://docs.videojs.com/docs/api/video.html
+    Install  |   - через bower, за пошуком: video.js
+    Version  |   v5.12.6 > і вище
+    
+    Template generator  |   http://www.scriptsmashup.com/Video_Skin_Generator/Videojs/videojs-skin-generator.html
+    Nice documentation  |   https://docs.brightcove.com/en/perform/brightcove-player/guides/customize-appearance.html#componentselectors
+    ', 1)?>
+  </code>
+
+  <code data-type="tpl"><?=hc('
+    <script src="/vendor/public/video.js/dist/video.min.js" defer></script>
+    
+    <video id="cool-video1" class="video-js vjs-default-skin">
+      <source type="video/flash" src="/uploaded/videos/test.flv">
+      <source type="video/mp4" src="/uploaded/videos/test.mp4">
+      <source type="video/webm" src="/uploaded/videos/test.webm">
+      <source type="video/ogg" src="/uploaded/videos/test.ogv">
+    </video>
+    ', 1)?>
+  </code>
+
+  <code data-type="js"><?=hc('
+    videojs("cool-video1", {
+      controls: true,
+      autoplay: false,
+      preload: "auto",
+      poster: "/skins/default/img/video-dp.png",
+      controlBar: {
+        volumeMenuButton: {
+          inline: false,
+          vertical: true
+        },
+        liveDisplay: true,
+        muteToggle: false
+      }
+    }, function () {
+      this.play(); // Запустити відразу
+      this.on("play", function(e) {}); // Кожну подію можна відстежити та виконати певні дії
+    });
+    ', 1)?>
+  </code>
+</section>
+<section data-section="8">
+  <nav>
+    <h2>Галерея "Magnific Popup" - відкриває УСЕ через модальне вікно</h2>
+    <ul>
+      <li>Api</li>
+      <li>Tpl</li>
+      <li>Less</li>
+    </ul>
+    <div class="num-section">8</div>
+  </nav>
+
+  <code data-type="api" class="hljs less"><?=hc('
+    API      |   http://dimsemenov.com/plugins/magnific-popup/documentation.html#including-files
+    Example  |   http://dimsemenov.com/plugins/magnific-popup/
+    ', 1)?>
+  </code>
+
+  <code data-type="tpl"><?=hc('
+    <script src="/vendor/public/magnific-popup/dist/jquery.magnific-popup.min.js" defer></script>
+    ', 1)?>
+  </code>
+
+  <code data-type="less"><?=hc('
+    // Переносимо всі стилі з їхнього коду у наш (там небагато коду).
+    ', 1)?>
   </code>
 </section>

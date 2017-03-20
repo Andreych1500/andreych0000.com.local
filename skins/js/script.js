@@ -11,6 +11,7 @@ $(document).ready(function() {
     // Remove all LocalStorage Navigation
     $('.clear-local-sorage').click(function(){
         localStorage.removeItem('navigation');
+        window.location.reload(true);
     });
 
     // Active Navigation

@@ -35,8 +35,10 @@
     <div class="hour"><img src="/skins/img/clock/hour.png"></div>
     <div class="sekond"><img src="/skins/img/clock/sek.png"></div>
   </div>
-  <div class="digital-watch"></div>
-  <div class="clear-local-sorage">Очистити сховище</div>
+  <div class="two-block-header">
+    <div class="digital-watch"></div>
+    <div class="clear-local-sorage">Очистити сховище</div>
+  </div>
 </header>
 
 <main><?=$content?></main>
