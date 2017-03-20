@@ -488,3 +488,87 @@
     ', 1)?>
   </code>
 </section>
+<section data-section="9">
+  <nav>
+    <h2>Технологія "LocalStore"</h2>
+    <ul>
+      <li>Api</li>
+      <li>Tpl</li>
+      <li>Js</li>
+    </ul>
+    <div class="num-section">9</div>
+  </nav>
+
+  <code data-type="api" class="hljs less pre-wrap"><?=hc('
+    LocalStorage - технологія відноситься до JavaScript. Суть її полягає в тому, що в нього можна записувати дані, які будуть зберігатися в браузері. Дані не зникнуть навіть якщо закрити браузер і відкрити його знов або піти зі сторінки і потім повернетеся на неї знов. Виходить, що можна зберігати дані форми в сховище, а при завантаженні сторінки перевіряти на наявність даних, і якщо вони є, то підставляти їх у форму.
+    
+    // Задати/отримати/видалити значення через name/value   |   // Альтернативний синтаксис
+    localStorage.setItem("lastname", object);               |   localStorage.lastname = object;
+    localStorage.getItem("lastname");                       |   localStorage.lastname;
+    localStorage.removeItem("lastname");
+    ', 1)?>
+  </code>
+
+  <code data-type="tpl"><?=hc('
+    <form action="/" method="post">
+      <textarea name="note"> <!-- Текст який попаде у сховище --> </textarea>
+      <div class="submit"> 
+        <input type="submit" value="Зберегти"> 
+      </div>
+    </form>
+    ', 1)?>
+  </code>
+
+  <code data-type="js"><?=hc('
+    if (window.localStorage) {
+        var elements = document.querySelectorAll("[name]");
+        
+        for (var i = 0, length = elements.length; i < length; i++) {
+            (function(element) {
+                var name = element.getAttribute("name");
+                
+                element.value = localStorage.getItem(name) || "";
+                element.onkeyup = function() {
+                    localStorage.setItem(name, element.value);
+                };
+            })(elements[i]);
+        }
+    }
+    
+    var object = { value: "Smith", timestamp: new Date().getTime() };
+    object = JSON.stringify(object);
+    
+    // Приклад з встановленням значення
+    function setLocalStorageNav(k, item) {
+      var value  = localStorage.getItem(\'navigation\'),
+      object = (value? JSON.parse(value) : {
+                  value      : {},
+                  timestamp  : new Date().getTime(),
+                  setTimeSec : 30 * 60 * 1000
+      });
+        
+      object.value[k] = item;
+      object          = JSON.stringify(object);
+      localStorage.setItem("navigation", object);
+    }
+    
+    // А тепер видаляємо застарілі записи
+    function removeLocalStorage() {
+      var obj = localStorage,
+      storage;
+        
+      for (var prop in obj) {
+        if (!obj.hasOwnProperty(prop)) {
+          continue;
+        }
+          
+        storage = JSON.parse(obj[prop]);
+          
+        if (new Date().getTime() > (storage.timestamp + storage.setTimeSec)) {
+          localStorage.removeItem(prop);
+        }
+      }
+    }
+    ', 1)?>
+  </code>
+</section>
