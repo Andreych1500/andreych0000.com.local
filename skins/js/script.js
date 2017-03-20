@@ -3,21 +3,85 @@ $(document).ready(function() {
     displayTime();
     startClock();
 
-    //
-    $('nav li').click(function() {
-        var suffix = $(this).text().toLowerCase();
+    // Remove old LocalStorage
+    if (window.localStorage && localStorage.length > 0) {
+        removeLocalStorage();
+    }
 
-        $(this).siblings('.active').removeClass('active');
+    // Remove all LocalStorage Navigation
+    $('.clear-local-sorage').click(function(){
+        localStorage.removeItem('navigation');
+    });
+
+    // Active Navigation
+    var nav = localStorage.getItem('navigation');
+    if (nav) {
+        var obj = JSON.parse(nav).value,
+            el;
+
+        for (var prop in obj) {
+            if (!obj.hasOwnProperty(prop)) {
+                continue;
+            }
+
+            el = $('section[data-section="' + prop + '"] nav li:nth-of-type(' + obj[prop] + ')');
+            el.addClass('active');
+
+            $('section[data-section="' + prop + '"] code[data-type="' + el.text().toLowerCase() + '"]').addClass('active');
+        }
+    }
+
+    // Navigation
+    $('nav li').click(function() {
+        var type       = $(this).text().toLowerCase(),
+            numSection = $(this).parents('section').attr('data-section'),
+            parent     = $('section[data-section="' + numSection + '"]');
+
+        $(this).siblings('.active').removeAttr('class');
         $(this).addClass('active');
-        $('code:not([data-type="' + suffix + '"])').removeClass('active');
-        $('code[data-type="' + suffix + '"]').addClass('active');
+
+        $(parent).find('code:not([data-type="' + type + '"])').removeClass('active');
+        $(parent).find('code[data-type="' + type + '"]').addClass('active');
+
+        setLocalStorageNav(numSection, $(this).index() + 1);
     });
 
     // Highlight code
-    $('code').each(function(i, block) {
+    $('code[data-type]').each(function(i, block) {
         hljs.highlightBlock(block);
     });
 });
+
+function setLocalStorageNav(k, item) {
+    var value  = localStorage.getItem('navigation'),
+        object = (value? JSON.parse(value) : {
+                value      : {},
+                timestamp  : new Date().getTime(),
+                setTimeSec : 30 * 60 * 1000
+            });
+
+    object.value[k] = item;
+    object          = JSON.stringify(object);
+
+    localStorage.setItem("navigation", object);
+}
+
+function removeLocalStorage() {
+    var obj = localStorage,
+        storage;
+
+    for (var prop in obj) {
+        if (!obj.hasOwnProperty(prop)) {
+            continue;
+        }
+
+        storage = JSON.parse(obj[prop]);
+
+        if (new Date().getTime() > (storage.timestamp + storage.setTimeSec)) {
+            localStorage.removeItem(prop);
+        }
+    }
+}
 
 function startClock() {
     var time    = new Date(),

@@ -36,6 +36,7 @@
     <div class="sekond"><img src="/skins/img/clock/sek.png"></div>
   </div>
   <div class="digital-watch"></div>
+  <div class="clear-local-sorage">Очистити сховище</div>
 </header>
 
 <main><?=$content?></main>
