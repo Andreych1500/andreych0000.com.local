@@ -3,6 +3,9 @@ $(document).ready(function() {
     displayTime();
     startClock();
 
+    // Start boat
+    boat();
+
     // Remove old LocalStorage
     if (window.localStorage && localStorage.length > 0) {
         removeLocalStorage();
@@ -52,6 +55,33 @@ $(document).ready(function() {
         hljs.highlightBlock(block);
     });
 });
+
+
+function boat() {
+    var times = 1;
+
+    function go() {
+        if(times > 6) {
+            times = Math.floor(Math.random() * 4);
+        }
+
+        if (times % 2) {
+           $('.boat > img').removeClass('back');
+           $('.boat > img').css('margin-left', 100 * times + 100 + 'px');
+        } else {
+            $('.boat > img').addClass('back');
+            $('.boat > img').css('margin-left', 100 * times - 100 + 'px');
+        }
+
+    }
+
+    go();
+
+    $('.boat img').on('transitionend webkitTransitionEnd oTransitionEnd', function () {
+        times++;
+        go();
+    });
+}
 
 function setLocalStorageNav(k, item) {
     var value  = localStorage.getItem('navigation'),

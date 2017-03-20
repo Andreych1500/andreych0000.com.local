@@ -216,3 +216,35 @@ code[data-type], div[data-type] {
 .pre-wrap {
   white-space: pre-wrap !important;
 }
+
+.boat {
+  height: 280px;
+  position: relative;
+  .transition(margin-left 6s ease-in-out);
+
+  & > img {
+    top: 25px;
+    z-index: 5;
+    position: absolute;
+    margin-left: 0;
+    max-width: 270px;
+    .transition(margin-left 6s ease-in-out);
+  }
+}
+
+.back {
+  .transform(scaleX(-1));
+  .filter(fliph);
+  .transition(all 0.7s ease);
+}
+
+.water {
+  position: absolute;
+  height: 65px;
+  width: 100%;
+
+  img {
+    height: 300px;
+    width: 100%;
+  }
+}
