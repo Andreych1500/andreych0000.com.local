@@ -1698,3 +1698,40 @@
     }', 1)?>
   </code>
 </section>
+
+<section data-section="19">
+  <nav>
+    <h2>Трюк на вертикальне та горизонтальне вирівнювання блока</h2>
+    <ul>
+      <li>Tpl</li>
+      <li>Less</li>
+    </ul>
+    <div class="num-section">19</div>
+  </nav>
+
+  <code data-type="tpl" class="xml"><?=hc('
+    <div class="modal-wrapper">
+      <div class="modal-cell">
+        <div class="modal-content">
+          <h1>Форма входа</h1>
+          <input type="text" placeholder="Логин">
+          <input type="password" placeholder="Пароль">
+          <button type="submit">Отправить</button>
+        </div>
+      </div>
+    </div>
+    ', 1)?>
+  </code>
+
+  <code data-type="less"><?=hc('
+    .modal-wrapper {
+      display: table;
+    }
+    
+    .modal-cell {
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+    }', 1)?>
+  </code>
+</section>
