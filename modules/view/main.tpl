@@ -1437,34 +1437,264 @@
   </code>
 </section>
 
+<section data-section="17">
+  <nav>
+    <h2>PayPal оплата</h2>
+    <ul>
+      <li>Api</li>
+      <li>Php1</li>
+      <li>Php2</li>
+    </ul>
+    <div class="num-section">17</div>
+  </nav>
 
+  <code data-type="api" class="hljs less"><?=hc('
+    1. Спочатку необхідно створити тестовий акаунт на сервісі: https://www.sandbox.paypal.com/
+    2. Обов\'язково вказувати продавця і покупця в тестовому режимі (свої дані, на робочій машині достатньо поміняти їх).
+    3. Там будемо перевіряти у тестовому режимі операції з перерахуванням коштів.
+    4. Програмна розробка: для цього необхідно 2 файла. Перший - це сам class_PayPal.php. Другий функціонал оплати.
+    ', 1)?>
+  </code>
 
+  <code data-type="php1" class="pre-wrap"><?=hc('
+    Файл 1: class_PayPal.php
+    
+    class class_PayPal {
+        var $last_error = "";
+        var $ipn_response = "";
+        var $ipn_log_file;
+        var $ipn_log = true;     // Включити/виключити запис в лог файл
+        var $ipn_data = array(); // Массив з даними від PayPal про оплату
+        var $fields = array();   // Массив з значеннями полів PayPal
+        
+        // Параметри по замовчуванню, у подальшому можуть перезаписуватись.
+        function class_PayPal() {
+            $this->paypal_url   = "https://www.sandbox.paypal.com/cgi-bin/webscr";
+            $this->ipn_log_file = $_SERVER["DOCUMENT_ROOT"]."/libs/PayPal/ipn_results.log";
+            
+            $this->add_field("rm", "2");         // Результат у вигляді (0,1 -> GET, 2 -> POST)
+            $this->add_field("cmd", "_xclick");  // Кнопка оплати при кліку (оплатити зараз)
+        }
+        
+        function add_field($field, $value) {
+            $this->fields[$field] = $value; // Параметри PayPal у вигляді array(key => value)
+        }
+        
+        /* Функція фактично генерує всю HTML-сторінку, що складається з форми з прихованими елементами, які передаються у PayPal. Це відбувається через атрибут OnLoad, коли сторінка сформувалася у прихованому режимі виконується функція яка запустить процес передачі даних на сервер PayPal. У цей момент користувачу з\'явиться повідомлення на екрані, де говориться: "Будь ласка, зачекайте, ваше замовлення обробляється ...", а потім відразу перенаправляється на PayPal. */
+        
+        function submit_paypal_post() {
+            echo "<html>\n";
+            echo "<head><title>Processing Payment...</title></head>\n";
+            echo "<body onLoad="document.forms[\'paypal_form\'].submit();\">\n";
+            echo "<form method="post" name="paypal_form" action=".$this->paypal_url.">\n";
+            
+            foreach($this->fields as $name => $value){
+                echo "<input type="hidden" name="$name" value="$value">\n";
+            }
+            
+            echo "</form>\n";
+            echo "</body></html>\n";
+        }
+        
+        function validate_ipn() {
+            $postData = "";
+        
+            foreach($_POST as $field => $value){
+                $this->ipn_data[$field] = $value;
+                $postData .= $field."=".urlencode($value)."&";
+            }
+            
+            $postData .= "cmd=_notify-validate";
+            
+            $curl = curl_init($this->paypal_url);
+            curl_setopt($curl, CURLOPT_HEADER, 0);
+            curl_setopt($curl, CURLOPT_POST, 1);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+            $this->ipn_response = curl_exec($curl);
+            curl_close($curl);
+            
+            if($this->ipn_response == "VERIFIED"){
+                $this->log_ipn_results(true);
+    
+                return true;
+            } else {
+                $this->last_error = "Invalid IPN transaction.";
+                $this->log_ipn_results(false);
+    
+                return false;
+            }
+        }
+        
+        function log_ipn_results($success) {
+            if(!$this->ipn_log){
+                return;
+            }
+            
+            // Timestamp and SUCCESS
+            $text = "[".date("m/d/Y H:i:s A")."] - ".($success? "SUCCESS!\n" : "FAIL: ".$this->last_error."\n");
+            
+            // Log the Get variable
+            $text .= "IPN GET Vars from Paypal:\n";
+            foreach($_GET as $key => $value){
+                $text .= $key."=".$value."\n";
+            }
+            
+            // Log the POST variables
+            $text .= "IPN POST Vars from Paypal:\n";
+            foreach($this->ipn_data as $key => $value){
+                $text .= $key."=".$value."\n";
+            }
+            
+            // Log the response from the paypal server
+            $text .= "\nIPN Response from Paypal Server:\n ".$this->ipn_response;
+            
+            // Write to log
+            $fp = fopen($this->ipn_log_file, \'a\');
+            fwrite($fp, $text."\n\n");
+            fclose($fp);  // close file
+        }
+        
+        function dump_fields() {
+            echo "<table width="95%" border="1" cellpadding="2" cellspacing="0">
+            <tr>
+               <td bgcolor="black"><b><font color="white">Field Name</font></b></td>
+               <td bgcolor="black"><b><font color="white">Value</font></b></td>
+            </tr>";
+            
+            ksort($this->fields);
+            foreach($this->fields as $key => $value){
+                echo "<tr><td>$key</td><td>".urldecode($value)."&nbsp;</td></tr>";
+            }
+            
+            echo "</table><br>";
+        }
+    }', 1)?>
+  </code>
 
+  <code data-type="php2" class="pre-wrap"><?=hc('       
+    Файл 2: Функціонал оплати
+    
+    if (isset($_POST["ok"])) { // Процес оплати...
+        require_once($_SERVER["DOCUMENT_ROOT"]."/libs/PayPal/class_PayPal.php"); // Підключаємо класс PayPal
+        
+        $p = new class_PayPal;                                                   // Створюєм екземпляр класа
+        $p->paypal_url   = "https://www.sandbox.paypal.com/cgi-bin/webscr";      // Тестовий url PayPal
+        //$p->paypal_url = "https://www.paypal.com/cgi-bin/webscr";              // Робочий url PayPal для оплат
+        
+        $this_script = $arMainParam["url_http_site"]."/apply/payment/";          // Сторінка cancel, success, ipn!!!
+        
+        if (!isset($_POST["price"]) || !preg_match("#^\d+\.00$#uis", $_POST["price"])) {
+            sessionInfo("/apply/payment/", "<p>Будь ласка не змінюйте код суми для оплати!</p>");
+        } else {
+            // Якщо потрібно додаткові параметри додаємо тут!
+            $p->add_field("first_name", $data["first_name"]);
+            $p->add_field("last_name", $data["last_name"]);
+            $p->add_field("item_name", "Service Online");      // Короткий опис для покупця
+            $p->add_field("amount", $_POST["price"]);          // Повна ціна оплати
+            $p->add_field("item_number", $data["idCardHash"]); // Номер замовлення ( Унікальний!!! )
+            $p->add_field("no_shipping", "1");                 // Запрос на адрес доставки (виключили)
+            $p->add_field("currency_code", "USD");             // Валюта
+            $p->add_field("charset", "utf-8");                 // Юнікод
+            
+            $p->add_field("business", "Savitskuy-facilitator@ukr.net"); // Email PayPal продавця
+            
+            $p->add_field("return", $this_script."payment-success/");
+            $p->add_field("cancel_return", $this_script."payment-cancel/");
+            $p->add_field("notify_url", $this_script."ipn-access/");
+            
+            $p->submit_paypal_post(); // Формумання скритої форми з параметрами які ми вказали
+            //$p->dump_fields();      // Вивід на екран даних для перевірки полів
+        }
+    }
+    
+    if (isset($_GET["key1"]) && $_GET["key1"] == "payment-success") {
+        // Тут після оплати перекидаємо користувача, що ви оплатили, но іде перевірка
+    }
+    
+    if (isset($_GET["key1"]) && $_GET["key1"] == "payment-cancel") {
+        sessionInfo("/apply/payment/", "<p>Оплата не виконалась, ви скасували свою оплату!</p>");
+    }
+    
+    if (isset($_GET["key1"]) == "ipn-access") {
+        // IP PayPal "173.0.82.126 -> test" "173.0.81.1 and 173.0.81.33" -> machine){
+        $ipPayPal = array(
+          "173.0.81.33",
+          "173.0.81.1"
+        );
+        
+        if(!in_array($_SERVER["REMOTE_ADDR"], $ipPayPal)) {
+            // Якщо приходять з іншого ресурса дані, ми їх блочимо
+        }
+        
+        require_once($_SERVER["DOCUMENT_ROOT"]."/libs/PayPal/class_PayPal.php"); // Підключаємо класс PayPal
+        
+        $p = new class_PayPal;                                                   // Створюєм екземпляр класа
+        $p->paypal_url = "https://www.sandbox.paypal.com/cgi-bin/webscr";        // Тестовий url PayPal
+        //$p->paypal_url = "https://www.paypal.com/cgi-bin/webscr";              // Робочий url PayPal для оплат
+        
+        if ($p->validate_ipn()) {
+            // Тут перевіряємо дані які зберігаються у ipn_data() array.
+            // Коротше кажучи - тут провіряємо оплату!!!
+        }
+    }', 1)?>
+  </code>
+</section>
 
+<section data-section="18">
+  <nav>
+    <h2>Редагування стилю Radio|Checkbox через CSS3</h2>
+    <ul>
+      <li>Tpl</li>
+      <li>Less</li>
+    </ul>
+    <div class="num-section">18</div>
+  </nav>
 
+  <code data-type="tpl" class="xml"><?=hc('
+    <input id="radio-1" name="radio" type="radio" checked>
+    <label for="radio-1">Активный</label>
+    
+    <input id="checkbox-1" type="checkbox" checked>
+    <label for="checkbox-1">Активный</label>
+    ', 1)?>
+  </code>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <code data-type="less"><?=hc('
+    label {
+      display: block;
+      margin-bottom: 5px;
+      margin-top: 10px;
+    }
+    
+    input[type="radio"], input[type="checkbox"] {
+      display: none;
+    }
+    
+    input + label::before {
+      content: "";
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      margin-right: 8px;
+      vertical-align: middle;
+      border: 3px solid #ffffff;
+      box-shadow: 0 0 0 3px #bdc3c7;
+    }
+    
+    input[type="radio"] + label::before {
+      border-radius: 50%;
+    }
+    
+    input:checked + label::before {
+      background: #1abc9c;
+      box-shadow: 0 0 0 3px #1abc9c;
+    }
+    
+    input:checked + label {
+      color: #1abc9c;
+    }', 1)?>
+  </code>
+</section>
