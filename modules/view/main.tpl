@@ -1270,3 +1270,201 @@
     ', 1)?>
   </code>
 </section>
+
+<section data-section="15">
+  <nav>
+    <h2>Маска для заповнення полів телефону дати і т.д.</h2>
+    <ul>
+      <li>Api</li>
+      <li>Tpl</li>
+      <li>Js</li>
+    </ul>
+    <div class="num-section">15</div>
+  </nav>
+
+  <code data-type="api" class="hljs less"><?=hc('
+    API      |   https://github.com/RobinHerbots/Inputmask
+    Install  |   - через bower, за пошуком: jquery.inputmask (автор: Robin Herbots)
+    
+    Для задання шаблону використовуємо для всіх цифр == 9, для алфавіту == а, змішано == *, наприклад:
+    mask: "*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]"
+    ', 1)?>
+  </code>
+
+  <code data-type="tpl"><?=hc('
+    <script src="/vendor/public/jquery.inputmask/dist/jquery.inputmask.bundle.min.js" defer></script>
+    
+    <input id="test1" type="text" placeholder="Маска для телефону">
+    <input id="test2" type="text" placeholder="Просте слово на 10 символів">
+    <input id="test3" type="text" placeholder="Необов\'язковий символ">
+    <input id="test4" type="text" placeholder="">
+    ', 1)?>
+  </code>
+
+  <code data-type="js"><?=hc('       
+    $("#test1").inputmask({
+        showMaskOnHover: false,
+        mask: "+38 (099) 999-99-99"
+    });
+    
+    $("#test2").inputmask({
+        showMaskOnHover: false,
+        mask: "aaaaaaaaaa"
+    });
+    
+    $("#test3").inputmask({
+        showMaskOnHover: false,
+        mask: "(99) 9999[9]-9999" // [] - необов\'язковий параметр може бути так і НЕ бути присутній символ
+    });
+    
+    $("#test4").inputmask("9[-9999]", {
+        showMaskOnHover: false,
+        greedy: true // включає вивід 1 послідкового _ або всіх ___ до взаганого шаблону
+    });
+    
+    Inputmask.isValid($(this).val(), { mask: "99/99/9999"} // Перевіряєм на правельне 
+    ', 1)?>
+  </code>
+</section>
+
+<section data-section="16">
+  <nav>
+    <h2>Перевірка на заповнення полів через сервер, мотодом Ajax</h2>
+    <ul>
+      <li>Api</li>
+      <li>Tpl</li>
+      <li>Js</li>
+    </ul>
+    <div class="num-section">16</div>
+  </nav>
+
+  <code data-type="api" class="hljs less"><?=hc('
+    1. Працює на основі власної розробки.
+    2. Використовується для простих задач.
+    3. Не потребує сторонніх ресурсів.
+    4. Підтримується мульти функціональність.
+    ', 1)?>
+  </code>
+
+  <code data-type="tpl"><?=hc('
+    <form action="/?ajax=ok&callback=ok" method="post" name="callback" onsubmit="return checkForm("callback");">
+      <div class="input-value">
+        <p>Name*</p>
+        <input type="text" name="name" value="">
+      </div>
+      <div class="input-value">
+        <p>Phone*</p>
+        <input type="text" name="phone" value="">
+      </div>
+      <div class="center-submit">
+        <input type="submit" name="ok" value="Відправити">
+      </div>
+    </form>
+    ', 1)?>
+  </code>
+
+  <code data-type="js"><?=hc('       
+    function checkForm(nameForm) {
+        var obj = $("form[name=" + nameForm + "] input:not([type="submit"])"),
+            action = $("form[name=" + nameForm + "]").attr("action"),
+            error = 0,
+            value = {};
+            
+        for (var i = 0; i < obj.length; i++) {
+            var input = $(obj[i]);
+            value[input.attr("name")] = input.val();
+            
+            if (input.attr("data-next-check") !== undefined) { // Поле яке не перевіряємо
+                continue;
+            }
+            
+            // Check email
+            if (input.attr("name") == "email") {
+                var atpos = input.val().indexOf("@");
+                var dotpos = input.val().lastIndexOf(".");
+                
+                if (!(atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= input.val().length) == false) {
+                    input.addClass("error");
+                    error = 1;
+                }
+            }
+            
+            if (input.val().length === 0) {
+                input.addClass("error");
+                error = 1;
+            }
+        }
+        
+        if (error == 0) {
+            $.ajax({
+                type: "POST",
+                url: action,
+                cache: false,
+                data: value,
+                success: function (response) {
+                    var res = JSON.parse(response);
+                    
+                    if (res["error"] === undefined && res["successful"] == "ok") {
+                    
+                        // Тут розділяємо форми
+                        if (nameForm == "nameform") {
+                    
+                        } else if(nameForm == "nameform"){
+                    
+                        } else {
+                            alert("The form with this "" +nameform +"" was not found");
+                        }
+                    } else {
+                        alert(res["error"]);
+                    }
+                }
+            });
+            
+            return false;
+        } else {
+            for (var j = 0; j < obj.length; j++) {
+                (function (i) {
+                    $(obj[i]).delay(3500).queue(function (next) {
+                        $(this).removeAttr("class");
+                        next();
+                    });
+                })(j); // (j) - ключ в пам\'яті браузера про анонімну створену функцію
+            }
+            
+            return false;
+        }
+    }', 1)?>
+  </code>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
