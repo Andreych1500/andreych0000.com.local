@@ -60,9 +60,10 @@ main {
 }
 
 footer {
-  background: #323946;
+  background: #7d91a1;
   color: white;
   text-align: left;
+  margin-top: 300px;
 }
 
 header {
@@ -113,7 +114,7 @@ header {
 }
 
 .clear-local-sorage {
-  color: #244856;
+  color: #3c4a63;
   font-weight: 700;
   border-bottom: 1px dashed #244856;
   cursor: pointer;
@@ -132,13 +133,13 @@ header {
 /* Content */
 nav {
   &:extend(.clearfix all);
-  background: #323946;
+  background: #7d91a1;
   color: white;
   padding: 0 10px;
 
   h2 {
     float: left;
-    font-size: 22px;
+    font-size: 20px;
     margin-left: 15px;
     padding: 10px 0;
   }
@@ -154,19 +155,19 @@ nav {
   li {
     display: inline-block;
     font-size: 16px;
-    padding: 15px 10px;
+    padding: 12px 10px;
     text-transform: uppercase;
     cursor: pointer;
     margin-right: 1px;
     .transition(all 0.5 ease);
 
     &:hover {
-      background: #44bef1;
+      background: #415963;
       .transition(all 0.5 ease);
     }
 
     &.active {
-      background: #44bef1;
+      background: #415963;
     }
   }
 }
@@ -187,14 +188,10 @@ section {
   color: white;
   vertical-align: middle;
   line-height: 20px;
-  background: #4fb7ec;
+  background: #3c4a63;
   top: 0;
   left: 0;
   .border-radius(0 0 8px 0);
-}
-
-.hljs {
-  display: none;
 }
 
 code[data-type], div[data-type] {
@@ -215,36 +212,4 @@ code[data-type], div[data-type] {
 
 .pre-wrap {
   white-space: pre-wrap !important;
-}
-
-.boat {
-  height: 280px;
-  position: relative;
-  .transition(margin-left 6s ease-in-out);
-
-  & > img {
-    top: 25px;
-    z-index: 5;
-    position: absolute;
-    margin-left: 0;
-    max-width: 270px;
-    .transition(margin-left 6s ease-in-out);
-  }
-}
-
-.back {
-  .transform(scaleX(-1));
-  .filter(fliph);
-  .transition(all 0.7s ease);
-}
-
-.water {
-  position: absolute;
-  height: 65px;
-  width: 100%;
-
-  img {
-    height: 300px;
-    width: 100%;
-  }
 }

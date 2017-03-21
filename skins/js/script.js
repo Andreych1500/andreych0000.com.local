@@ -3,16 +3,13 @@ $(document).ready(function() {
     displayTime();
     startClock();
 
-    // Start boat
-    boat();
-
     // Remove old LocalStorage
     if (window.localStorage && localStorage.length > 0) {
         removeLocalStorage();
     }
 
     // Remove all LocalStorage Navigation
-    $('.clear-local-sorage').click(function(){
+    $('.clear-local-sorage').click(function() {
         localStorage.removeItem('navigation');
         window.location.reload(true);
     });
@@ -41,13 +38,23 @@ $(document).ready(function() {
             numSection = $(this).parents('section').attr('data-section'),
             parent     = $('section[data-section="' + numSection + '"]');
 
-        $(this).siblings('.active').removeAttr('class');
-        $(this).addClass('active');
+        if ($(this).is('.active')) {
+            $(this).removeAttr('class');
+            $(parent).find('code[data-type="' + type + '"]').removeClass('active');
 
-        $(parent).find('code:not([data-type="' + type + '"])').removeClass('active');
-        $(parent).find('code[data-type="' + type + '"]').addClass('active');
+            var obj = JSON.parse(localStorage.getItem('navigation'));
+            delete obj.value[numSection];
 
-        setLocalStorageNav(numSection, $(this).index() + 1);
+            localStorage.setItem('navigation', JSON.stringify(obj));
+        } else {
+            $(this).siblings('.active').removeAttr('class');
+            $(this).addClass('active');
+
+            $(parent).find('code:not([data-type="' + type + '"])').removeClass('active');
+            $(parent).find('code[data-type="' + type + '"]').addClass('active');
+
+            setLocalStorageNav(numSection, $(this).index() + 1);
+        }
     });
 
     // Highlight code
@@ -55,33 +62,6 @@ $(document).ready(function() {
         hljs.highlightBlock(block);
     });
 });
-
-
-function boat() {
-    var times = 1;
-
-    function go() {
-        if(times > 6) {
-            times = Math.floor(Math.random() * 4);
-        }
-
-        if (times % 2) {
-           $('.boat > img').removeClass('back');
-           $('.boat > img').css('margin-left', 100 * times + 100 + 'px');
-        } else {
-            $('.boat > img').addClass('back');
-            $('.boat > img').css('margin-left', 100 * times - 100 + 'px');
-        }
-
-    }
-
-    go();
-
-    $('.boat img').on('transitionend webkitTransitionEnd oTransitionEnd', function () {
-        times++;
-        go();
-    });
-}
 
 function setLocalStorageNav(k, item) {
     var value  = localStorage.getItem('navigation'),

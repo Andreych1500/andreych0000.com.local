@@ -41,15 +41,7 @@
   </div>
 </header>
 
-<main>
-  <?=$content?>
-  <div class="boat">
-    <img src="/skins/img/boat.png" alt="boat">
-    <div class="water">
-      <img src="/skins/img/water.gif" alt="water">
-    </div>
-  </div>
-</main>
+<main><?=$content?></main>
 
 <footer>Всі права захищені<br> &copy; <?=(date("Y") == '2017'? '2017' : '2017 - '.date("Y"))?></footer>
 

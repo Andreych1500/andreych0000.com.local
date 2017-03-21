@@ -66,52 +66,53 @@
     
     $("#js-register-form").validate({
         rules: {
-          form_name: {
-            notnumbers: true
-          },
-          form_email: {
-            required: true,
-            email: true
-          },
-          form_tel: {
-            required: true,
-            digits: true
-          },
-          form_pswd1: {
-            required: true,
-            minlength: 6
-          },
-          form_pswd2: {
-            required: true,
-            minlength: 6,
-            equalTo: "#form_pswd1"
-          }
+            form_name: {
+                notnumbers: true
+            },
+            form_email: {
+                required: true,
+                email: true
+            },
+            form_tel: {
+                required: true,
+                digits: true
+            },
+            form_pswd1: {
+                required: true,
+                minlength: 6
+            },
+            form_pswd2: {
+                required: true,
+                minlength: 6,
+                equalTo: "#form_pswd1"
+            }
         },
         messages: {
-          form_name: {
-            required: "Поле Имя обязательное для заполнения"
-          },
-          form_email: {
-            required: "Поле E-mail обязательное для заполнения",
-            email: "Введите пожалуйста корректный e-mail"
-          }
+            form_name: {
+                required: "Поле Имя обязательное для заполнения"
+            },
+            form_email: {
+                required: "Поле E-mail обязательное для заполнения",
+                email: "Введите пожалуйста корректный e-mail"
+            }
         },
         focusCleanup: true,
         focusInvalid: false,
         invalidHandler: function(event, validator) {
-          $(".js-form-message").text("Исправьте пожалуйста все ошибки.");
+            $(".js-form-message").text("Исправьте пожалуйста все ошибки.");
         },
         onkeyup: function(element) {
-          $(".js-form-message").text("");
+            $(".js-form-message").text("");
         },
         errorPlacement: function(error, element) {
-          return true;
+            return true;
         },
         errorClass: "form-input_error",
         validClass: "form-input_success"
     });', 1)?>
   </code>
 </section>
+
 <section data-section="2">
   <nav>
     <h2>Добавлення джерела при копіюванні тексту в буфер</h2>
@@ -123,18 +124,19 @@
 
   <code data-type="js"><?=hc('
     function copyTextLink(event) {
-      event.preventDefault();
+        event.preventDefault();
       
-      var copyText = window.getSelection();
-      var newText = copyText + \'\n\nИсточник: \' + document.location.href + \'\n© Все права защищени.\';
+        var copyText = window.getSelection();
+        var newText = copyText + \'\n\nИсточник: \' + document.location.href + \'\n© Все права защищени.\';
       
-      (event.clipboardData || window.clipboardData).setData(\'Text\', newText);
+        (event.clipboardData || window.clipboardData).setData(\'Text\', newText);
     }
     
     document.addEventListener(\'copy\', copyTextLink);
     ', 1)?>
   </code>
 </section>
+
 <section data-section="3">
   <nav>
     <h2>Кнопка поділитися - "соціальні мережі"</h2>
@@ -182,85 +184,86 @@
   <code data-type="js"><?=hc('
     var url,
         Share = {
-          vkontakte: function (purl, ptitle, pimg, text) {
-            url = "https://vkontakte.ru/share.php?";
-            url += "url=" + encodeURIComponent(purl);
-            url += "&title=" + encodeURIComponent(ptitle);
-            url += "&description=" + encodeURIComponent(text);
-            url += "&image=" + encodeURIComponent(pimg);
-            url += "&noparse=true";
-            Share.popup(url);
-          },
-          facebook: function (purl, pimg) {
-            url = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(purl);
-            url += "&picture=" + encodeURIComponent(pimg);
-            Share.popup(url);
-          },
-          twitter: function (purl, ptitle) {
-            url = "https://twitter.com/share?";
-            url += "url=" + encodeURIComponent(purl);
-            url += "&text=" + encodeURIComponent(ptitle);
-            url += "&via=" + encodeURIComponent("https://twitter.com/video");
-            Share.popup(url);
-          },
-          od: function (purl) {
-            url = "https://connect.ok.ru/offer?url=" + encodeURIComponent(purl);
-            Share.popup(url);
-          },
-          mailru: function (purl, ptitle, pimg, text) {
-            url = "https://connect.mail.ru/share?";
-            url += "url=" + encodeURIComponent(purl);
-            url += "&title=" + encodeURIComponent(ptitle);
-            url += "&description=" + encodeURIComponent(text);
-            url += "&imageurl=" + encodeURIComponent(pimg);
-            Share.popup(url)
-          },
-          plusone: function (purl) {
-            url = "https://plus.google.com/share?url=" + encodeURIComponent(purl);
-            Share.popup(url)
-          },
-          popup: function (url) {
-            window.open(url, "", "toolbar=0,status=0,width=626,height=436");
-          }
+            vkontakte: function (purl, ptitle, pimg, text) {
+                url = "https://vkontakte.ru/share.php?";
+                url += "url=" + encodeURIComponent(purl);
+                url += "&title=" + encodeURIComponent(ptitle);
+                url += "&description=" + encodeURIComponent(text);
+                url += "&image=" + encodeURIComponent(pimg);
+                url += "&noparse=true";
+                Share.popup(url);
+            },
+            facebook: function (purl, pimg) {
+                url = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(purl);
+                url += "&picture=" + encodeURIComponent(pimg);
+                Share.popup(url);
+            },
+            twitter: function (purl, ptitle) {
+                url = "https://twitter.com/share?";
+                url += "url=" + encodeURIComponent(purl);
+                url += "&text=" + encodeURIComponent(ptitle);
+                url += "&via=" + encodeURIComponent("https://twitter.com/video");
+                Share.popup(url);
+            },
+            od: function (purl) {
+                url = "https://connect.ok.ru/offer?url=" + encodeURIComponent(purl);
+                Share.popup(url);
+            },
+            mailru: function (purl, ptitle, pimg, text) {
+                url = "https://connect.mail.ru/share?";
+                url += "url=" + encodeURIComponent(purl);
+                url += "&title=" + encodeURIComponent(ptitle);
+                url += "&description=" + encodeURIComponent(text);
+                url += "&imageurl=" + encodeURIComponent(pimg);
+                Share.popup(url)
+            },
+            plusone: function (purl) {
+                url = "https://plus.google.com/share?url=" + encodeURIComponent(purl);
+                Share.popup(url)
+            },
+            popup: function (url) {
+                window.open(url, "", "toolbar=0,status=0,width=626,height=436");
+            }
         };
         
     EnableShareIcons(Share);
     
     function EnableShareIcons(Share) {
-      $(".soc_icon").click(function () {
+        $(".soc_icon").click(function () {
     
-        var title = document.title;
-        var desc = $("meta[name="description"]")[0].content;
-        var url = window.location.href;
-        var img = window.location.href + "skins/default/img/logo.png";
+            var title = document.title;
+            var desc = $("meta[name="description"]")[0].content;
+            var url = window.location.href;
+            var img = window.location.href + "skins/default/img/logo.png";
     
-        var soc_pic = $("meta[property="og:image"]");
-        if (soc_pic.length > 0) {
-          img = soc_pic[0].content;
-        }
+            var soc_pic = $("meta[property="og:image"]");
+            if (soc_pic.length > 0) {
+                img = soc_pic[0].content;
+            }
     
-        if ($(this).hasClass("js_vk")) {
-          Share.vkontakte(url, title, img, desc);
-        }
-        if ($(this).hasClass("js_facebook")) {
-          Share.facebook(url, img);
-        }
-        if ($(this).hasClass("js_twitter")) {
-          Share.twitter(url, title);
-        }
-        if ($(this).hasClass("js_od")) {
-          Share.od(url);
-        }
-        if ($(this).hasClass("js_mail_ru")) {
-          Share.mailru(url, title, img, desc);
-        }
-        if ($(this).hasClass("js_google")) {
-          Share.plusone(url);
-        }
-      });
+            if ($(this).hasClass("js_vk")) {
+                Share.vkontakte(url, title, img, desc);
+            }
+            if ($(this).hasClass("js_facebook")) {
+                Share.facebook(url, img);
+            }
+            if ($(this).hasClass("js_twitter")) {
+                Share.twitter(url, title);
+            }
+            if ($(this).hasClass("js_od")) {
+                Share.od(url);
+            }
+            if ($(this).hasClass("js_mail_ru")) {
+                Share.mailru(url, title, img, desc);
+            }
+            if ($(this).hasClass("js_google")) {
+                Share.plusone(url);
+            }
+        });
     }', 1)?>
   </code>
 </section>
+
 <section data-section="4">
   <nav>
     <h2>Кнопка у Верх</h2>
@@ -316,23 +319,24 @@
     scroll_top(); // Виклик
     
     function scroll_top() {
-      $("#scroll-top").on("click", function () {
-        $("html, body").animate({scrollTop: 0});
-        return false;
-      });
+        $("#scroll-top").on("click", function () {
+            $("html, body").animate({scrollTop: 0});
+            return false;
+        });
       
-      $(window).scroll(function () {
-        if ($(window).scrollTop() > 400) {
-          $("#scroll-top").fadeIn();
-        } else {
-          $("#scroll-top").fadeOut();
-        }
-      });
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 400) {
+                $("#scroll-top").fadeIn();
+            } else {
+                $("#scroll-top").fadeOut();
+            }
+        });
       
-      $(window).scroll();
+        $(window).scroll();
     }', 1)?>
   </code>
 </section>
+
 <section data-section="5">
   <nav>
     <h2>Перевірка на включення "Cookie" у користувача</h2>
@@ -344,10 +348,11 @@
 
   <code data-type="js"><?=hc('
     if (!navigator.cookieEnabled) {
-      alert("You have disabled cookies. Several functions may not work intermittently or completely broken. Enable them to improve work!");
+        alert("You have disabled cookies. Several functions may not work intermittently or completely broken. Enable them to improve work!");
     }', 1)?>
   </code>
 </section>
+
 <section data-section="6">
   <nav>
     <h2>Перевірка на включення "JavaScript" у браузері</h2>
@@ -406,6 +411,7 @@
     }', 1)?>
   </code>
 </section>
+
 <section data-section="7">
   <nav>
     <h2>Відображення відео через бібліотеку "Video.js"</h2>
@@ -442,25 +448,26 @@
 
   <code data-type="js"><?=hc('
     videojs("cool-video1", {
-      controls: true,
-      autoplay: false,
-      preload: "auto",
-      poster: "/skins/default/img/video-dp.png",
-      controlBar: {
-        volumeMenuButton: {
-          inline: false,
-          vertical: true
-        },
-        liveDisplay: true,
-        muteToggle: false
-      }
+        controls: true,
+        autoplay: false,
+        preload: "auto",
+        poster: "/skins/default/img/video-dp.png",
+        controlBar: {
+            volumeMenuButton: {
+                inline: false,
+                vertical: true
+            },
+            liveDisplay: true,
+            muteToggle: false
+        }
     }, function () {
-      this.play(); // Запустити відразу
-      this.on("play", function(e) {}); // Кожну подію можна відстежити та виконати певні дії
+        this.play(); // Запустити відразу
+        this.on("play", function(e) {}); // Кожну подію можна відстежити та виконати певні дії
     });
     ', 1)?>
   </code>
 </section>
+
 <section data-section="8">
   <nav>
     <h2>Галерея "Magnific Popup" - відкриває УСЕ через модальне вікно</h2>
@@ -488,6 +495,7 @@
     ', 1)?>
   </code>
 </section>
+
 <section data-section="9">
   <nav>
     <h2>Технологія "LocalStore"</h2>
@@ -540,34 +548,724 @@
     
     // Приклад з встановленням значення
     function setLocalStorageNav(k, item) {
-      var value  = localStorage.getItem(\'navigation\'),
-      object = (value? JSON.parse(value) : {
-                  value      : {},
-                  timestamp  : new Date().getTime(),
-                  setTimeSec : 30 * 60 * 1000
-      });
+        var value  = localStorage.getItem(\'navigation\'),
+        object = (value? JSON.parse(value) : {
+            value      : {},
+            timestamp  : new Date().getTime(),
+            setTimeSec : 30 * 60 * 1000
+        });
         
-      object.value[k] = item;
-      object          = JSON.stringify(object);
-      localStorage.setItem("navigation", object);
+        object.value[k] = item;
+        object          = JSON.stringify(object);
+        localStorage.setItem("navigation", object);
     }
     
     // А тепер видаляємо застарілі записи
     function removeLocalStorage() {
-      var obj = localStorage,
-      storage;
+        var obj = localStorage,
+        storage;
         
-      for (var prop in obj) {
-        if (!obj.hasOwnProperty(prop)) {
-          continue;
+        for (var prop in obj) {
+            if (!obj.hasOwnProperty(prop)) {
+                continue;
+            }
+          
+            storage = JSON.parse(obj[prop]);
+          
+            if (new Date().getTime() > (storage.timestamp + storage.setTimeSec)) {
+                localStorage.removeItem(prop);
+            }
         }
-          
-        storage = JSON.parse(obj[prop]);
-          
-        if (new Date().getTime() > (storage.timestamp + storage.setTimeSec)) {
-          localStorage.removeItem(prop);
+    }
+    ', 1)?>
+  </code>
+</section>
+
+<section data-section="10">
+  <nav>
+    <h2>Слайдер</h2>
+    <ul>
+      <li>Api</li>
+      <li>Tpl</li>
+      <li>Less</li>
+      <li>Js</li>
+    </ul>
+    <div class="num-section">10</div>
+  </nav>
+
+  <code data-type="api" class="hljs less pre-wrap"><?=hc('
+    API       |   https://github.com/woocommerce/FlexSlider/wiki/FlexSlider-Properties
+    Install   |   - через bower, за пошуком: flexslider/jquery.flexslider.js
+    ', 1)?>
+  </code>
+
+  <code data-type="tpl"><?=hc('
+    <div class="main-banner">
+      <div class="flex-itemList">
+        <img src="/img1.jpg" title="img1" alt="img1">
+        <img src="/img2.jpg" title="img1" alt="img2">
+        <img src="/img3.jpg" title="img1" alt="img3">
+      </div>
+      <div class="flex-rows-list">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="flex-prev"></div>
+      <div class="flex-next"></div>
+    </div>', 1)?>
+  </code>
+
+  <code data-type="less"><?=hc('
+    .main-banner {
+      position: relative;
+      zoom: 1;
+      padding: 0 35px;
+      margin: 30px auto 0;
+      height: auto;
+      max-height: 480px;
+      max-width: 700px; // Максимальна ширина зображення
+      
+      .flex-next, .flex-prev {
+        z-index: 100;
+        position: absolute;
+        top: 50%;
+        height: 37px; // Висота внутрішнього контента
+        margin: -20px 0 0 0;
+        cursor: pointer;
+        
+        &::before {
+          content: "";
+          display: inline-block;
+          height: inherit;
+          width: 21px;
         }
       }
+      
+      .flex-prev {
+        left: 0;
+        
+        &::before {
+          background: url("@{urlDirImg}sprite.png") -657px -226px no-repeat;
+        }
+        
+        &:hover::before {
+          background: url("@{urlDirImg}sprite.png") -290px -226px no-repeat;
+        }
+      }
+      
+      .flex-next {
+        right: 0;
+        
+        &::before {
+          background: url("@{urlDirImg}sprite.png") -682px -226px no-repeat;
+        }
+        
+        &:hover:before {
+          background: url("@{urlDirImg}sprite.png") -315px -226px no-repeat;
+        }
+      }
+      
+      .flex-itemList {
+        overflow: hidden;
+        zoom: 1;
+        max-height: inherit;
+        border: 2px solid @color2;
+        &:extend(.clear-fix all);
+      }
+      
+      .flex-rows-list {
+        position: absolute;
+        bottom: 15px;
+        text-align: center;
+        list-style: none;
+        line-height: 10px;
+        width: 80%;
+        padding: 0 10%;
+        z-index: 20;
+        left: 0;
+      
+        span {
+          background: #fff;
+          display: inline-block;
+          width: 14px;
+          height: 14px;
+          margin: 0 5px;
+          cursor: pointer;
+          .border-radius(100%);
+          .opacity(0.9);
+      
+          &.flex-active {
+            background-color: @color2;
+          }
+        }
+      }
+    }
+      ', 1)?>
+  </code>
+
+  <code data-type="js"><?=hc('
+    $(".main-banner").flexslider({
+        animation: "fade",
+        selector: ".flex-itemList > img",
+        touch: false, // IE знімаємо фікс у анімації fade(touch у події вписали webkitTransition для IE це не підтримується)
+        controlNav: true,
+        manualControls: ".flex-rows-list span",
+        directionNav: true,
+        customDirectionNav: ".flex-prev, .flex-next",
+    });
+    ', 1)?>
+  </code>
+</section>
+
+<section data-section="11">
+  <nav>
+    <h2>Затримка функцій Jquery через "deley()"</h2>
+    <ul>
+      <li>Js</li>
+    </ul>
+    <div class="num-section">11</div>
+  </nav>
+
+  <code data-type="js"><?=hc('
+    $(".example").delay(300).queue(function (next) {
+        $(".example2").css("margin-left", "100px");
+        next();
+    });
+    ', 1)?>
+  </code>
+</section>
+
+<section data-section="12">
+  <nav>
+    <h2>Мульти функціональний таймер зворотного відліку</h2>
+    <ul>
+      <li>Api</li>
+      <li>Php + Tpl</li>
+      <li>Less</li>
+      <li>Js</li>
+    </ul>
+    <div class="num-section">12</div>
+  </nav>
+
+  <code data-type="api" class="hljs less"><?=hc('
+    1. Можна вказувати безліч на сторінці.
+    2. Потрібно вказати час до початку та до кінця. // До кінця повино бути обов\'язкове поле!
+    ', 1)?>
+  </code>
+
+  <code data-type="php + tpl" class="hljs php"><?=hc('
+      <?=(isset($share["top"])? $share["top"] : "<div class="timer"><p class="timer-text">Таймер не существует</p></div>")?>
+      
+      // PHP: Формування відбувається тут
+      $shares = q("
+          SELECT `id`, `name`, `end`, `start`, `symbol_code`
+          FROM admin_shares
+          WHERE `active` = 1
+          AND `end` != ""
+      ");
+      
+      if($shares->num_rows > 0){
+          while($row = hsc($shares->fetch_assoc())){
+              $stop = false;
+              $jsEnd = (new DateTime($row["end"]))->format("M d,Y H:i:s");
+              $jsStart = "";
+      
+              if (!empty($row["start"])){
+                  $jsStart = (new DateTime($row["start"]))->format("M d,Y H:i:s");
+                  $d = timePassed($row["start"], "to");
+              }
+      
+              if (!isset($d) || !is_array($d)){
+                  if(!is_array($d = timePassed($row["end"], "end"))){
+                      $stop = true;
+                  }
+              }
+              
+              if ($stop){
+                  $htmlTimer = "<div class="timer" data-timer-id="\'.$row[\'id\'].\'"><p class="timer-text">Акция Завершена</p></div>";
+              } else {
+                  $d["type"] = ($d["type"] == "end"? "До конца акции:" : "До начала акции:");
+                  
+                  $htmlTimer = "<div class="timer" data-timer-id="\'.$row[\'id\'].\'" data-timer-start="\'.$jsStart.\'" data-timer-end="\'.$jsEnd.\'"
+                                                                                      data-timer-text="До конца акции:|Акция Завершена">
+                    <p class="timer-text">\'.$d[\'type\'].\'</p>
+                    
+                    <div class="day">
+                      <span>\'.$d[\'day\'][0].\'</span> <span>\'.$d[\'day\'][1].\'</span> <span>\'.$d[\'day\'][2].\'</span>
+                    </div>
+                    
+                    <div class="separator">:</div>
+                    
+                    <div class="hour">
+                      <span>\'.$d[\'hour\'][0].\'</span> <span>\'.$d[\'hour\'][1].\'</span>
+                    </div>
+                    
+                    <div class="separator">:</div>
+                    
+                    <div class="min">
+                      <span>\'.$d[\'min\'][0].\'</span> <span>\'.$d[\'min\'][1].\'</span>
+                    </div>
+                    
+                    <div class="separator">:</div>
+                    
+                    <div class="sec">
+                      <span>\'.$d[\'sec\'][0].\'</span> <span>\'.$d[\'sec\'][1].\'</span>
+                    </div>
+                  
+                  </div>";   
+              }
+              
+              $share[$row["symbol_code"]] = $htmlTimer;
+          }   
+      }
+      
+      function timePassed($var, $type){
+          $date = time();
+          $date_t = strtotime($var);
+          $timer = $date_t - $date;
+          
+          if($date_t > $date){
+              $day = intval($timer / (24 * 60 * 60));
+              $day = strval($day < 10? \'00\'.$day : ($day > 99? $day : \'0\'.$day));
+              
+              $hour = intval($timer / (60 * 60)) % 24;
+              $hour = strval($hour < 10? \'0\'.$hour : $hour);
+              
+              $min = intval($timer / 60) % 60;
+              $min = strval($min < 10? \'0\'.$min : $min);
+              
+              $sec = intval($timer) % 60;
+              $sec = strval($sec < 10? \'0\'.$sec : $sec);
+              
+              return [
+                "type" => $type,
+                "day"  => $day,
+                "hour" => $hour,
+                "min"  => $min,
+                "sec"  => $sec
+              ];
+          } else {
+              return false;
+          }
+      }
+      ', 1)?>
+  </code>
+
+  <code data-type="less"><?=hc('
+    .timer {
+      margin: 20px auto 0;
+      max-width: 320px;
+      font-size: 0;
+      text-align: center;
+      
+      & > div {
+        display: inline-block;
+        .border-radius(2px);
+      }
+    }
+     
+    div:not([class="separator"]) {
+      overflow: hidden;
+      padding: 2px;
+      background: url("@{urlDirImg}sprite.png") -164px -34px no-repeat;
+    }
+      
+    .separator {
+      font: 36px @font-TrebuchetMS-bolt;
+      vertical-align: text-bottom;
+      line-height: 46px;
+      margin: 0 4px;
+      
+      @media screen and (max-width: 940px) {
+        margin: 0;
+      }
+    }
+      
+    span {
+      display: inline-block;
+      position: relative;
+      font: 36px @font-TrebuchetMS-bolt;
+    }
+    
+    .timer-text {
+      font: 21px @font-TrebuchetMS;
+      text-align: center;
+      color: #fff;
+      line-height: 26px;
+      margin-bottom: 10px;
+    }', 1)?>
+  </code>
+
+  <code data-type="js"><?=hc('
+    var objTimers = {};
+    
+    $(".timer[data-timer-id]").each(function (i) {
+        objTimers[i] = {
+            id: $(this).attr("data-timer-id"),
+            start: $(this).attr("data-timer-start"),
+            end: $(this).attr("data-timer-end"),
+            text: $(this).attr("data-timer-text")
+        };
+    });
+    
+    getTimer(objTimers); // Заводимо наші таймери
+    
+    function getTimer(obj) {
+        var date = new Date(),
+            date_t, // Кінцева дата
+            timer,  // Скільки залишається до кінця таймінга
+            sel,
+            param,
+            text,
+            newDate = false;
+    
+        for (var prop in obj) {
+            if (!obj.hasOwnProperty(prop)) {
+                continue;
+            }
+    
+            param = obj[prop];
+            sel = $(".timer[data-timer-id="" + param.id + ""]");
+    
+            if (param.end === undefined) {
+                delete(obj[prop]);
+                continue;
+            } else if (param.start.length > 0) {
+                date_t = new Date(param.start);
+    
+                if (date_t < date) {
+                    date_t = new Date(param.end);
+                    sel.find(".timer-text").text(param.text.split("|")[0]);
+                    obj[prop].start = "";
+                    newDate = true;
+                }
+            } else {
+                date_t = new Date(param.end);
+            }
+    
+            if (date_t > date) { // Провіряєм на закінчення відліку
+                timer = date_t - date;
+    
+                var day = parseInt(timer / (24 * 60 * 60 * 1000));
+                day = (day < 10 ? "00" + day : (day > 99 ? day : "0" + day)).toString();
+          
+                var hour = parseInt(timer / (60 * 60 * 1000)) % 24;
+                hour = (hour < 10 ? "0" + hour : hour).toString();
+          
+                var min = parseInt(timer / (1000 * 60)) % 60;
+                min = (min < 10 ? "0" + min : min).toString();
+          
+                var sec = parseInt(timer / 1000) % 60;
+                sec = (sec < 10 ? "0" + sec : sec).toString();
+    
+                if (newDate) {
+                    sel.find(".day").html("<span>" + day[0] + "</span> <span>" + day[1] + "</span> <span>" + day[2] + "</span>");
+                    sel.find(".hour").html("<span>" + hour[0] + "</span> <span>" + hour[1] + "</span>");
+                    sel.find(".min").html("<span>" + min[0] + "</span> <span>" + min[1] + "</span>");
+                    sel.find(".sec").html("<span>" + sec[0] + "</span> <span>" + sec[1] + "</span>");
+                    continue;
+                }
+    
+                // Replace Animation
+                var nextDay = false;
+    
+                // Дні
+                if (hour == 23 && min == 59 && sec == 59) {
+                    nextDay = true;
+                }
+          
+                if (day[1] == 9 && day[2] == 9 && nextDay) {
+                    animation_t(sel.find(".day span:first"), day[0]);
+                }
+          
+                if (day[1] == 9 && nextDay) {
+                    animation_t(sel.find(".day span:eq(1)"), day[1]);
+                }
+          
+                if (nextDay) {
+                    animation_t(sel.find(".day span:last"), day[2])
+                }
+          
+                // Години
+                if ((hour == 9 || hour == 19 || hour == 23) && min == 59 && sec == 59) {
+                    animation_t(sel.find(".hour span:first"), hour[0]);
+                }
+          
+                if (min == 59 && sec == 59) {
+                    animation_t(sel.find(".hour span:last"), hour[1]);
+                }
+          
+                // Хвилини
+                if (min[1] == 9 && sec == 59) {
+                    animation_t(sel.find(".min span:first"), min[0]);
+                }
+          
+                if (sec == 59) {
+                    animation_t(sel.find(".min span:last"), min[1]);
+                }
+          
+                // Секунди
+                if (sec[1] == 9) {
+                    animation_t(sel.find(".sec span:first"), sec[0]);
+                }
+    
+                animation_t(sel.find(".sec span:last"), sec[1]);
+            } else {
+                sel.html("<p class="timer-text">" + param.text.split("|")[1] + "</p>");
+                delete(obj[prop]);
+            }
+        }
+      
+        var count = 0;
+        for (var i in obj) {
+            if (obj.hasOwnProperty(i)) {
+                count++;
+            }
+        }
+    
+        if (count > 0) {
+            setTimeout(function () {
+                getTimer(obj)
+            }, 1000);
+        } else {
+            return false;
+        }
+    }
+    
+    function animation_t(sel, param) {
+        sel.html(param).css({"top": "-45px", "opacity": "0"}).animate({"top": "0", "opacity": "1"}, 600);
+    }
+  ', 1)?>
+  </code>
+</section>
+
+<section data-section="13">
+  <nav>
+    <h2>Google maps</h2>
+    <ul>
+      <li>Api</li>
+      <li>Js</li>
+    </ul>
+    <div class="num-section">13</div>
+  </nav>
+
+  <code data-type="api" class="hljs less"><?=hc('
+    1. Перш ніж підключити карту, необхідно авторизуватись на сайті Google та отримита ключ для карти.
+    2. Ключ можна отримати тут: https://developers.google.com/maps/documentation/javascript/get-api-key
+    ', 1)?>
+  </code>
+
+  <code data-type="tpl"><?=hc('
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=KEY&language=ru"></script>
+    <div id="map-canvas"></div>
+    ', 1)?>
+  </code>
+
+  <code data-type="js"><?=hc('
+    function mapStart() {
+        var map = new google.maps.Map(document.getElementById("map-canvas"), {
+            center: {lat: 49.5504868, lng: 25.5866435},
+            zoom: 17,
+            mapTypeId: google.maps.MapTypeId.ROADMAP, // Відображення карти
+            disableDefaultUI: true,                   // Відключаєм стандартні настройки
+            zoomControl: true,                        // Значок + -
+            mapTypeControl: true,                     // Значок вибір типу карти
+            mapTypeControlOptions: {
+                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+                position: google.maps.ControlPosition.LEFT_TOP
+            },
+            scaleControl: false,      // Метраж на карті
+            streetViewControl: true,  // Мождивість попасти у вулицю онлайн
+            rotateControl: false,
+            scrollwheel: false
+        });
+
+        var marker = new google.maps.Marker({
+            position: {lat: 49.550666, lng: 25.586499},
+            map: map,
+            title: "Children\'s Dream",
+            animation: google.maps.Animation.DROP
+        });
+        
+        var infowindow = new google.maps.InfoWindow({
+            content: "<div class="content-map"><h1>Магазин автомобілів</h1 ></div>"
+        });
+    
+        google.maps.event.addListener(marker, "click", function() {
+            infowindow.open(map,marker);
+        });
+    }
+    ', 1)?>
+  </code>
+</section>
+
+<section data-section="14">
+  <nav>
+    <h2>Адаптивне модальне вікно на CSS3</h2>
+    <ul>
+      <li>Tpl</li>
+      <li>Less</li>
+      <li>Js</li>
+    </ul>
+    <div class="num-section">14</div>
+  </nav>
+
+  <code data-type="tpl"><?=hc('
+    <div data-modal="modal1"> Тут контент </div> 
+    <!-- data-modal - назва індентифікатора кнопки на яку нажимаємо і появляється спливайка -->
+    
+    <div data-open-modal="modal1">Відкриваємо вікно</div> <!-- Кнопка щоб відкрити вікно -->
+    <!-- data-open-modal - назва блоку елемента на який посилаємся -->
+    ', 1)?>
+  </code>
+
+  <code data-type="less"><?=hc('
+    div[data-modal] {
+      display: none;
+    }
+    
+    .modHeader {
+      font-size: 26px;
+      line-height: 32px;
+      text-align: center;
+      margin-bottom: 20px;
+      max-width: 390px;
+      color: @color6;
+    }
+    
+    .close {
+      position: absolute;
+      right: -15px;
+      top: -15px;
+      line-height: 30px;
+      width: 30px;
+      text-align: center;
+      border: 2px solid #ffffff;
+      background: #2face5;
+      color: #ffffff;
+      font-family: "Helvetica", "Arial", sans-serif;
+      font-weight: bold;
+      cursor: pointer;
+      .border-radius(100%);
+      .transition(all 0.3s);
+      
+      &:hover {
+        background: @color2;
+        .transition(all 0.3s);
+      }
+    }
+    
+    .dm-modal div[data-modal] {
+      display: block;
+    }
+    
+    .dm-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.65);
+      overflow: auto;
+      width: 100%;
+      height: 100%;
+      z-index: 1000;
+    }
+    
+    .dm-overlay:target {
+      display: block;
+      .animation(fade 0.6s);
+    }
+    
+    .dm-table {
+      display: table;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .dm-cell {
+      display: table-cell;
+      padding: 20px 1em;
+      vertical-align: middle;
+      text-align: center;
+    }
+    
+    .dm-modal {
+      display: inline-block;
+      padding: 15px;
+      background: #e0f3fb;
+      text-align: left;
+      color: @color6;
+      border: 1px solid #2face5;
+      position: relative;
+      
+      /* Максимальна ширина */
+      max-width: 50em;
+      .box-shadow(0px 15px 20px rgba(0, 0, 0, 0.22), 0px 19px 60px rgba(0, 0, 0, 0.3));
+      .animation(fade 0.8s);
+    }
+
+    /* Анімація при появі затемнення і блоків з вмістом*/
+    @-moz-keyframes fade {
+      from {
+        .opacity(0);
+      }
+      
+      to {
+        .opacity(1);
+      }
+    }
+      
+    @-webkit-keyframes fade {
+      from {
+        .opacity(0);
+      }
+      
+      to {
+        .opacity(1);
+      }
+    }
+      
+    @keyframes fade {
+      from {
+        .opacity(0);
+      }
+      
+      to {
+        .opacity(1);
+      }
+    }
+    ', 1)?>
+  </code>
+
+  <code data-type="js"><?=hc('
+    function modalWindow(dataName) {
+        var nameBlock = dataName;
+        var content = $("div[data-modal="\' + nameBlock + \'"]");
+    
+        if (content.length) {
+            // Wrap Content
+            $(function () {
+                var modal = \'<div class="dm-overlay"><div class="dm-table"><div class="dm-cell"><div class="dm-modal"></div></div></div></div>\';
+                content.wrap(modal).before("<div class="close">X</div>");
+            });
+    
+            $("body").click(function (e) {
+                var el = e.target;
+    
+                if ($(el).parents().is(".dm-overlay") && ($(el).is(".close") || $(el).is(".dm-cell"))) {
+                    var backContent = $("div[data-modal="\' + nameBlock + \'"]");
+    
+                    $(".dm-table").hide();
+                    $(".dm-overlay").animate({opacity:0}, function(){
+                        $(this).remove();
+                    });
+    
+                    $("footer").after(backContent);
+                }
+            });
+        } else {
+            alert("Error: modal window with that name does not exist");
+        }
     }
     ', 1)?>
   </code>
