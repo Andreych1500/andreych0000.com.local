@@ -444,6 +444,7 @@
       <li>Api</li>
       <li>Tpl</li>
       <li>Js</li>
+      <li>Example</li>
     </ul>
     <div class="num-section">7</div>
   </nav>
@@ -491,6 +492,10 @@
     });
     ', 1)?>
   </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-7.jpg" alt="section-7">
+  </code>
 </section>
 
 <section data-section="8">
@@ -500,6 +505,7 @@
       <li>Api</li>
       <li>Tpl</li>
       <li>Less</li>
+      <li>Example</li>
     </ul>
     <div class="num-section">8</div>
   </nav>
@@ -518,6 +524,10 @@
   <code data-type="less"><?=hc('
     // Переносимо всі стилі з їхнього коду у наш (там небагато коду).
     ', 1)?>
+  </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-8.jpg" alt="section-8">
   </code>
 </section>
 
@@ -1690,6 +1700,7 @@
     <ul>
       <li>Tpl</li>
       <li>Less</li>
+      <li>Example</li>
     </ul>
     <div class="num-section">18</div>
   </nav>
@@ -1738,6 +1749,10 @@
       color: #1abc9c;
     }', 1)?>
   </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-18.jpg" alt="section-18">
+  </code>
 </section>
 
 <section data-section="19">
@@ -1746,6 +1761,7 @@
     <ul>
       <li>Tpl</li>
       <li>Less</li>
+      <li>Example</li>
     </ul>
     <div class="num-section">19</div>
   </nav>
@@ -1774,6 +1790,10 @@
       text-align: center;
       vertical-align: middle;
     }', 1)?>
+  </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-19.jpg" alt="section-19">
   </code>
 </section>
 
@@ -1925,3 +1945,97 @@
     <img src="/skins/img/section/section-21.jpg" alt="section-21">
   </code>
 </section>
+
+<section data-section="22">
+  <nav>
+    <h2>Зловісні тіні</h2>
+    <ul>
+      <li>Tpl</li>
+      <li>Less</li>
+      <li>Example</li>
+    </ul>
+    <div class="num-section">22</div>
+  </nav>
+
+  <code data-type="tpl"><?=hc('
+    <div class="btn">Вперед!</div>
+    ', 1)?>
+  </code>
+
+  <code data-type="less"><?=hc('
+    .btn {
+      position: relative;
+      width: 250px;
+      margin: 0 25px;
+      margin-top: 100px;
+      padding: 20px 0;
+      line-height: 20px;
+      text-align: center;
+      text-transform: uppercase;
+      color: white;
+      background: #2c3e50;
+      cursor: pointer;
+      box-shadow:
+        inset 0 5px 0 0 #2ecc71,
+        inset 0 -5px 0 0 #2ecc71,
+        0 -20px 0 -10px #c0392b,
+        0 -40px 0 -20px #e74c3c,
+        0 20px 0 -10px #2980b9,
+        0 40px 0 -20px #3498db
+      ;
+    }
+    
+    .btn::after {
+      content: "";
+      width: 50%;
+      height: 5px;
+      background: #16a085;
+      position: absolute;
+      top: 0;
+      right: 0
+    }
+    
+    .btn::before {
+      content: "";
+      width: 50%;
+      height: 5px;
+      background: #16a085;
+      position: absolute;
+      bottom: 0;
+      left: 0
+    }', 1)?>
+  </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-22.jpg" alt="section-22">
+  </code>
+</section>
+
+
+<? /* example:
+<section data-section="22">
+  <nav>
+    <h2>Зловісні тіні</h2>
+    <ul>
+      <li>Tpl</li>
+      <li>Less</li>
+      <li>Example</li>
+    </ul>
+    <div class="num-section">22</div>
+  </nav>
+
+  <code data-type="tpl"><?=hc('
+
+    ', 1)?>
+  </code>
+
+  <code data-type="less"><?=hc('
+
+    ', 1)?>
+  </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-21.jpg" alt="section-21">
+  </code>
+</section>
+ */?>
