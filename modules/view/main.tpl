@@ -369,7 +369,8 @@
   <code data-type="js"><?=hc('
     if (!navigator.cookieEnabled) {
         alert("You have disabled cookies. Several functions may not work intermittently or completely broken. Enable them to improve work!");
-    }', 1)?>
+    }
+    ', 1)?>
   </code>
 </section>
 
@@ -2023,4 +2024,4 @@
   <ellipse cx="135" cy="210" rx="10" ry="20" fill="crimson"/>
 </svg>
 
-<div width="100px" height="100" fill="white">Скільки ж мені ще треба вчитись! Охх...</div>
+<div width="100px" height="100" fill="white">Скільки ж мені, ЩЕ потрібно вчитись?! Охх...</div>
