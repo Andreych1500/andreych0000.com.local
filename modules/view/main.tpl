@@ -2011,31 +2011,16 @@
   </code>
 </section>
 
+<svg width="310" height="290">
+  <ellipse cx="150" cy="270" rx="75" ry="20" fill="lightgray"/>
 
-<? /* example:
-<section data-section="22">
-  <nav>
-    <h2>Зловісні тіні</h2>
-    <ul>
-      <li>Tpl</li>
-      <li>Less</li>
-      <li>Example</li>
-    </ul>
-    <div class="num-section">22</div>
-  </nav>
+  <circle cx="150" cy="150" r="120" fill="gold"/>
+  <circle cx="100" cy="120" r="50" fill="white"/>
+  <circle cx="170" cy="120" r="50" fill="white"/>
+  <circle cx="170" cy="120" r="10" fill="black"/>
+  <circle cx="100" cy="120" r="10" fill="black"/>
 
-  <code data-type="tpl"><?=hc('
+  <ellipse cx="135" cy="210" rx="10" ry="20" fill="crimson"/>
+</svg>
 
-    ', 1)?>
-  </code>
-
-  <code data-type="less"><?=hc('
-
-    ', 1)?>
-  </code>
-
-  <code data-type="example">
-    <img src="/skins/img/section/section-21.jpg" alt="section-21">
-  </code>
-</section>
- */?>
+<div width="100px" height="100" fill="white">Скільки ж мені ще треба вчитись! Охх...</div>
