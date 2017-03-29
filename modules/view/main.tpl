@@ -6,6 +6,7 @@
       <li>Tpl</li>
       <li>Less</li>
       <li>Js</li>
+      <li>Example</li>
     </ul>
     <div class="num-section">1</div>
   </nav>
@@ -40,7 +41,7 @@
   <code data-type="tpl"><?=hc('
     <script src="/vendor/public/jquery-validation/dist/jquery.validate.min.js" defer></script>
     
-    <form action="#" method="#" class="form" id="js-register-form">
+    <form action="#" method="post" class="form" id="js-register-form">
       <div class="message js-form-message"></div>
       <input type="text"     placeholder="Ваше имя"      name="form_name"  class="form-input">
       <input type="email"    placeholder="Ваш e-mail"    name="form_email" class="form-input">
@@ -111,6 +112,10 @@
         validClass: "form-input_success"
     });', 1)?>
   </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-1.jpg" alt="section-1">
+  </code>
 </section>
 
 <section data-section="2">
@@ -118,6 +123,7 @@
     <h2>Добавлення джерела при копіюванні тексту в буфер</h2>
     <ul>
       <li>Js</li>
+      <li>Example</li>
     </ul>
     <div class="num-section">2</div>
   </nav>
@@ -135,6 +141,10 @@
     document.addEventListener(\'copy\', copyTextLink);
     ', 1)?>
   </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-2.jpg" alt="section-2">
+  </code>
 </section>
 
 <section data-section="3">
@@ -145,6 +155,7 @@
       <li>Tpl</li>
       <li>Less</li>
       <li>JS</li>
+      <li>Example</li>
     </ul>
     <div class="num-section">3</div>
   </nav>
@@ -262,6 +273,10 @@
         });
     }', 1)?>
   </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-3.jpg" alt="section-3">
+  </code>
 </section>
 
 <section data-section="4">
@@ -271,6 +286,7 @@
       <li>Tpl</li>
       <li>Less</li>
       <li>JS</li>
+      <li>Example</li>
     </ul>
     <div class="num-section">4</div>
   </nav>
@@ -335,6 +351,10 @@
         $(window).scroll();
     }', 1)?>
   </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-4.jpg" alt="section-4">
+  </code>
 </section>
 
 <section data-section="5">
@@ -359,6 +379,7 @@
     <ul>
       <li>Tpl</li>
       <li>Less</li>
+      <li>Example</li>
     </ul>
     <div class="num-section">6</div>
   </nav>
@@ -409,6 +430,10 @@
         margin-top: 15px;
       }
     }', 1)?>
+  </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-6.jpg" alt="section-6">
   </code>
 </section>
 
@@ -589,6 +614,7 @@
       <li>Tpl</li>
       <li>Less</li>
       <li>Js</li>
+      <li>Example</li>
     </ul>
     <div class="num-section">10</div>
   </nav>
@@ -715,6 +741,10 @@
         customDirectionNav: ".flex-prev, .flex-next",
     });
     ', 1)?>
+  </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-10.jpg" alt="section-10">
   </code>
 </section>
 
@@ -1045,7 +1075,9 @@
     <h2>Google maps</h2>
     <ul>
       <li>Api</li>
+      <li>Tpl</li>
       <li>Js</li>
+      <li>Example</li>
     </ul>
     <div class="num-section">13</div>
   </nav>
@@ -1097,6 +1129,10 @@
         });
     }
     ', 1)?>
+  </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-13.jpg" alt="section-13">
   </code>
 </section>
 
@@ -1444,6 +1480,7 @@
       <li>Api</li>
       <li>Php1</li>
       <li>Php2</li>
+      <li>Example</li>
     </ul>
     <div class="num-section">17</div>
   </nav>
@@ -1641,6 +1678,10 @@
         }
     }', 1)?>
   </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-17.jpg" alt="section-17">
+  </code>
 </section>
 
 <section data-section="18">
@@ -1733,5 +1774,154 @@
       text-align: center;
       vertical-align: middle;
     }', 1)?>
+  </code>
+</section>
+
+<section data-section="20">
+  <nav>
+    <h2>Кругла стрілка за допомогою рамки</h2>
+    <ul>
+      <li>Less</li>
+      <li>Example</li>
+    </ul>
+    <div class="num-section">20</div>
+  </nav>
+
+  <code data-type="less"><?=hc('
+    @color: #618ad2;
+    
+    .zero-centered() {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+    }
+    
+    .size(@width: 0px; @heigth: 0px) {
+      width: @width;
+      height: @heigth;
+    }
+    
+    .round-border-line(@border-width: 0px) {
+      border: @border-width solid @color;
+      border-right-color: transparent;
+      border-radius: 50%;
+    }
+    
+    .absolute-pseudo-element() {
+      content: "";
+      position: absolute;
+    }
+    
+    .position(@top: 0px; @left: 0px) {
+      top: @top;
+      left: @left;
+    }
+    
+    .triangle-bottom-right(@border-width: 0px) {
+      border-width: @border-width;
+      border-style: solid;
+      border-bottom-color: @color;
+      border-right-width: 0;
+      border-top-width: 0;
+      border-left-color: transparent;
+    }
+    
+    .arrow-round {
+      .zero-centered;
+      .size(150px, 150px);
+      .round-border-line(25px);
+    }
+    
+    .arrow-round::after {
+      .absolute-pseudo-element;
+      .triangle-bottom-right(50px);
+      .position(-15px, 110px);
+    }', 1)?>
+  </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-20.jpg" alt="section-20">
+  </code>
+</section>
+
+<section data-section="21">
+  <nav>
+    <h2>Психоделічна тінь</h2>
+    <ul>
+      <li>Tpl</li>
+      <li>Less</li>
+      <li>Example</li>
+    </ul>
+    <div class="num-section">21</div>
+  </nav>
+
+  <code data-type="tpl"><?=hc('
+    <p>
+      <span>C</span><span>S</span><span>S</span>
+    </p>
+    ', 1)?>
+  </code>
+
+  <code data-type="less"><?=hc('
+    p {
+        margin: 0;
+        padding-top: 60px;
+        text-align: center;
+    }
+    
+    span:last-child {
+        margin-left: 60px;
+        text-shadow: 
+            -5px -5px 0 #7fdbff,
+            -10px -10px 0 #39cccc,
+            -15px -15px 0 #3d9970,
+            -20px -20px 0 #2ecc40,
+            -25px -25px 0 #01ff70,
+            -30px -30px 0 #ffdc00,
+            -35px -35px 0 #ff851b,
+            -40px -40px 0 #ff4136,
+            -45px -45px 0 #f012be,
+            -50px -50px 0 #b10dc9
+        ;
+    }
+    
+    span:nth-of-type(2) {
+        margin-left: 60px;
+        text-shadow: 
+            0 -5px 0 #7fdbff,
+            0 -10px 0 #39cccc,
+            0 -15px 0 #3d9970,
+            0 -20px 0 #2ecc40,
+            0 -25px 0 #01ff70,
+            0 -30px 0 #ffdc00,
+            0 -35px 0 #ff851b,
+            0 -40px 0 #ff4136,
+            0 -45px 0 #f012be,
+            0 -50px 0 #b10dc9
+        ;
+    }
+    
+    span:first-child {
+        margin-left: 0;
+        text-shadow: 
+            5px -5px 0 #7fdbff,
+            10px -10px 0 #39cccc,
+            15px -15px 0 #3d9970,
+            20px -20px 0 #2ecc40,
+            25px -25px 0 #01ff70,
+            30px -30px 0 #ffdc00,
+            35px -35px 0 #ff851b,
+            40px -40px 0 #ff4136,
+            45px -45px 0 #f012be,
+            50px -50px 0 #b10dc9
+        ;
+    }', 1)?>
+  </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-21.jpg" alt="section-21">
   </code>
 </section>
