@@ -56,6 +56,7 @@ footer, main, header {
 main {
   padding: 5px 0;
   margin: 15px auto;
+  position: relative;
   .box-shadow(none);
 }
 
@@ -215,4 +216,29 @@ code[data-type], div[data-type] {
 
 .pre-wrap {
   white-space: pre-wrap !important;
+}
+
+main::after {
+  content: "Скільки ж мені, ЩЕ потрібно вчитись?! Охх...";
+  width: 290px;
+  height: 35px;
+  padding: 20px;
+  position: absolute;
+  bottom: 200px;
+  left: 250px;
+  background: #fff;
+  .box-shadow(-1px 0 5px #7d91a1);
+  font-family: sans-serif;
+  text-transform: uppercase;
+  border: 1px solid #7d91a1;
+}
+
+main::before {
+  content: "";
+  position: absolute;
+  bottom: 160px;
+  left: 250px;
+  border: 20px solid transparent;
+  border-left: 20px solid #7d91a1;
+  border-top: 20px solid #7d91a1;
 }

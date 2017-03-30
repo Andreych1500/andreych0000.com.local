@@ -362,6 +362,7 @@
     <h2>Перевірка на включення "Cookie" у користувача</h2>
     <ul>
       <li>JS</li>
+      <li>Example</li>
     </ul>
     <div class="num-section">5</div>
   </nav>
@@ -371,6 +372,10 @@
         alert("You have disabled cookies. Several functions may not work intermittently or completely broken. Enable them to improve work!");
     }
     ', 1)?>
+  </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-5.jpg" alt="section-5">
   </code>
 </section>
 
@@ -785,6 +790,7 @@
       <li>Php + Tpl</li>
       <li>Less</li>
       <li>Js</li>
+      <li>Example</li>
     </ul>
     <div class="num-section">12</div>
   </nav>
@@ -1079,6 +1085,10 @@
     }
   ', 1)?>
   </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-12.jpg" alt="section-12">
+  </code>
 </section>
 
 <section data-section="13">
@@ -1325,6 +1335,7 @@
       <li>Api</li>
       <li>Tpl</li>
       <li>Js</li>
+      <li>Example</li>
     </ul>
     <div class="num-section">15</div>
   </nav>
@@ -1371,6 +1382,10 @@
     
     Inputmask.isValid($(this).val(), { mask: "99/99/9999"} // Перевіряєм на правельне 
     ', 1)?>
+  </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-15.jpg" alt="section-15">
   </code>
 </section>
 
@@ -2023,5 +2038,3 @@
 
   <ellipse cx="135" cy="210" rx="10" ry="20" fill="crimson"/>
 </svg>
-
-<div width="100px" height="100" fill="white">Скільки ж мені, ЩЕ потрібно вчитись?! Охх...</div>
