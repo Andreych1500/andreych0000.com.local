@@ -2027,6 +2027,213 @@
   </code>
 </section>
 
+<section data-section="23">
+  <nav>
+    <h2>Цікаві CSS кнопки</h2>
+    <ul>
+      <li>Tpl</li>
+      <li>Less</li>
+      <li>Example</li>
+    </ul>
+    <div class="num-section">22</div>
+  </nav>
+
+  <code data-type="tpl"><?=hc('
+    <div class="effect-1">
+      <a href="#">Апельсин</a>
+    </div>
+    
+    <div class="effect-2">
+      <a href="#">Виноград</a>
+    </div>
+    
+    <div class="effect-3">
+      <!-- Цікавий момент! -->
+      <a href="#" data-hover="Лайм">Лайм</a>
+    </div>
+    
+    <div class="effect-4">
+      <a href="#">Ківі</a>
+    </div>
+    ', 1)?>
+  </code>
+
+  <code data-type="less"><?=hc('
+    div[class^="effect-"] a {
+      position: relative;
+      display: inline-block;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: 300;
+      letter-spacing: 1px;
+      outline: none;
+      text-decoration: none !important;
+    }
+    
+    /* BEGIN effect 1 */
+    div[class^="effect-"] {
+      width: 150px;
+      margin: 0 auto;
+      padding: 15px 10px;
+      text-align: center;
+    }
+    
+    .effect-1 {
+      background-color: #f19f0f;
+    }
+    
+    .effect-1 a {
+      padding: 6px 0 8px;
+      color: #ffffff;
+    }
+    
+    .effect-1 a::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.3s;
+      transform: translateY(10px);
+    }
+    
+    .effect-1 a:hover::after {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+    /* END effect 1 */
+    
+    /* BEGIN effect 2*/
+    .effect-2 {
+      background: #1f7199;
+    }
+    
+    .effect-2 a {
+      padding: 0 20px;
+      height: 45px;
+      line-height: 45px;
+      color: #ffffff;
+    }
+    
+    .effect-2 a::before,
+    .effect-2 a::after {
+      content: "";
+      position: absolute;
+      width: 45px;
+      height: 2px;
+      background-color: #ffffff;
+      opacity: 0.2;
+      transition: all 0.3s;
+    }
+    
+    .effect-2 a::before {
+      top: 0;
+      left: 0;
+      transform: rotate(90deg);
+      transform-origin: 0 0;
+    }
+    
+    .effect-2 a::after {
+      right: 0;
+      bottom: 0;
+      transform: rotate(90deg);
+      transform-origin: 100% 100%;
+    }
+    
+    .effect-2 a:hover::before {
+      left: 50%;
+      opacity: 1;
+      transform: rotate(0deg) translateX(-50%);
+    }
+    
+    .effect-2 a:hover::after {
+      right: 50%;
+      opacity: 1;
+      transform: rotate(0deg) translateX(50%);
+    }
+    /* END effect 2 */
+    
+    /* BEGIN effect 3 */
+    .effect-3 {
+      background-color: #2ac56c;
+    }
+    
+    .effect-3 a {
+      color: rgba(0, 0, 0, 0.2);
+      font-weight: bold;
+    }
+    
+    .effect-3 a::before {
+      content: attr(data-hover); /* Цікавий момент! */
+      position: absolute;
+      color: #ffffff;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    
+    .effect-3 a:hover::before {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    /* END effect 3 */
+    
+    /* BEGIN effect 4 */
+    .effect-4 {
+      background-color: #3fa46a;
+    }
+    
+    .effect-4 a {
+      padding: 8px;
+      font-weight: bold;
+      color: #237546;
+    }
+    
+    .effect-4 a:hover {
+      color: #ffffff;
+      transition: color 0.3s;
+    }
+    
+    .effect-4 a::before,
+    .effect-4 a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #ffffff;
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    
+    .effect-4 a::before {
+      top: 0;
+      transform: translateY(-10px);
+    }
+    
+    .effect-4 a::after {
+      bottom: 0;
+      transform: translateY(10px);
+    }
+    
+    .effect-4 a:hover::before,
+    .effect-4 a:hover::after {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+    /* END effect 4*/
+    ', 1)?>
+  </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-23.jpg" alt="section-23">
+  </code>
+
+</section>
+
+
+
 <svg width="310" height="290">
   <ellipse cx="150" cy="270" rx="75" ry="20" fill="lightgray"/>
 
