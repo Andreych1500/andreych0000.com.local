@@ -1817,65 +1817,41 @@
   <nav>
     <h2>Кругла стрілка за допомогою рамки</h2>
     <ul>
+      <li>Tpl</li>
       <li>Less</li>
       <li>Example</li>
     </ul>
     <div class="num-section">20</div>
   </nav>
 
+  <code data-type="tpl"><?=hc('
+    <div class="arrow-round"></div>
+  ', 1)?>
+  </code>
+
   <code data-type="less"><?=hc('
-    @color: #618ad2;
-    
-    .zero-centered() {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      margin: auto;
-    }
-    
-    .size(@width: 0px; @heigth: 0px) {
-      width: @width;
-      height: @heigth;
-    }
-    
-    .round-border-line(@border-width: 0px) {
-      border: @border-width solid @color;
-      border-right-color: transparent;
-      border-radius: 50%;
-    }
-    
-    .absolute-pseudo-element() {
-      content: "";
-      position: absolute;
-    }
-    
-    .position(@top: 0px; @left: 0px) {
-      top: @top;
-      left: @left;
-    }
-    
-    .triangle-bottom-right(@border-width: 0px) {
-      border-width: @border-width;
-      border-style: solid;
-      border-bottom-color: @color;
-      border-right-width: 0;
-      border-top-width: 0;
-      border-left-color: transparent;
-    }
-    
     .arrow-round {
-      .zero-centered;
-      .size(150px, 150px);
-      .round-border-line(25px);
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 100px auto;
+      border: 50px solid #0074d9;
+      border-radius: 50%;
+      border-right-color: transparent;
+      
+      &:after {
+        content: "";
+        position: absolute;
+        top: -45px;
+        left: 130px;
+        border: 100px solid #ffffff;
+        border-top-width: 0;
+        border-right-width: 0;
+        border-bottom-color: #0074d9;
+        border-left-color: transparent;
+      }
     }
-    
-    .arrow-round::after {
-      .absolute-pseudo-element;
-      .triangle-bottom-right(50px);
-      .position(-15px, 110px);
-    }', 1)?>
+  ', 1)?>
   </code>
 
   <code data-type="example">
@@ -2035,7 +2011,7 @@
       <li>Less</li>
       <li>Example</li>
     </ul>
-    <div class="num-section">22</div>
+    <div class="num-section">23</div>
   </nav>
 
   <code data-type="tpl"><?=hc('
@@ -2229,10 +2205,186 @@
   <code data-type="example">
     <img src="/skins/img/section/section-23.jpg" alt="section-23">
   </code>
-
 </section>
 
+<section data-section="24">
+  <nav>
+    <h2>При наведені на зображення висувається опис через CSS</h2>
+    <ul>
+      <li>Tpl</li>
+      <li>Less</li>
+      <li>Example</li>
+    </ul>
+    <div class="num-section">24</div>
+  </nav>
 
+  <code data-type="tpl"><?=hc('
+    <section class="works">
+      <a class="caption-link" href="#" data-title="Sunset" data-description="Lorem ipsum dolor sit amet, consectetuer adipiscing elit.">
+        <img src="/skins/img/main-bg.jpg" alt="Sunset">
+      </a>
+    </section>
+    ', 1)?>
+  </code>
+
+  <code data-type="less"><?=hc('
+    .works {
+      width: 240px;
+      margin: 100px auto;
+      padding: 20px;
+      background: white;
+      box-shadow: 0 0 3px #cccccc;
+    }
+    
+    .caption-link {
+      position: relative;
+      z-index: 1;
+      display: block;
+      overflow: hidden;
+    }
+    
+    .caption-link img {
+      display: block;
+      max-width: 100%;
+      transition: transform 0.7s ease-in-out;
+    }
+    
+    .caption-link:hover img {
+      transform: translateX(100%);
+    }
+    
+    .caption-link::before,
+    .caption-link::after {
+      position: absolute;
+      z-index: -1;
+      width: 100%;
+      text-align: center;
+      background: #333333;
+      box-sizing: border-box;
+      transition: transform 0.7s ease-in-out;
+      transform: translateX(-80px);
+    }
+    
+    .caption-link::before {
+      content: attr(data-title);
+      height: 30%;
+      padding: 30px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #ffffff;
+    }
+    
+    .caption-link::after {
+      content: attr(data-description);
+      top: 30%;
+      height: 70%;
+      padding: 0 30px;
+      color: #d7bb97;
+    }
+    
+    .caption-link:hover::before,
+    .caption-link:hover::after {
+      transform: translateX(0);
+    }
+    ', 1)?>
+  </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-24.jpg" alt="section-24">
+  </code>
+</section>
+
+<section data-section="25">
+  <nav>
+    <h2>Хлібні крихти з цікавою реалізацією :before</h2>
+    <ul>
+      <li>Tpl</li>
+      <li>Less</li>
+      <li>Example</li>
+    </ul>
+    <div class="num-section">25</div>
+  </nav>
+
+  <code data-type="tpl"><?=hc('
+    <div class="breadcrumbs">
+      <a href="#">Головна</a>
+      <a class="active" href="#">Курси</a>
+      <a href="#">Седектори</a>
+    </div>
+    ', 1)?>
+  </code>
+
+  <code data-type="less"><?=hc('
+    .breadcrumbs {
+      display: inline-block;
+      margin: 150px 0;
+      color: black;
+      box-shadow: 0 0 2px #aaaaaa;
+      text-align: center;
+      counter-reset: flag; /* Оголошуємо лічильник */
+    }
+    
+    .breadcrumbs a::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: -18px;
+      z-index: 1;
+      width: 36px;
+      height: 36px;
+      background-color: white;
+      border-radius: 50px 0 0 0;
+      box-shadow: 1px 1px 0 1px #dddddd;
+      transform: rotate(-45deg) scale(0.73);
+      transition: background-color 0.1s;
+    }
+    
+    .breadcrumbs a:hover,
+    .breadcrumbs a:hover::after,
+    .breadcrumbs a.active,
+    .breadcrumbs a.active::after {
+      background-color: #f1c40f;
+    }
+    
+    .breadcrumbs a {
+      position: relative;
+      float: left;
+      padding-left: 60px;
+      padding-right: 10px;
+      text-decoration: none;
+      line-height: 36px;
+      color: black;
+      background-color: white;
+      transition: background-color 0.1s;
+      
+      &::before {
+        content: counter(flag) "."; /* Виводимо дані */
+        counter-increment: flag;    /* Збільшуємо значення лічильника */
+        position: absolute;
+        top: 8px;
+        left: 30px;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: 0 0 2px #cccccc;
+      }
+      
+      &:first-child {
+        padding-left: 46px;
+      }
+      
+      &:first-child::before {
+        left: 14px;
+      }
+    }', 1)?>
+  </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-25.jpg" alt="section-25">
+  </code>
+</section>
 
 <svg width="310" height="290">
   <ellipse cx="150" cy="270" rx="75" ry="20" fill="lightgray"/>
