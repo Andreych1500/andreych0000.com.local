@@ -2386,6 +2386,106 @@
   </code>
 </section>
 
+<section data-section="26">
+  <nav>
+    <h2>Заокруглення в середину кутів CSS</h2>
+    <ul>
+      <li>Tpl</li>
+      <li>Less</li>
+      <li>Example</li>
+    </ul>
+    <div class="num-section">26</div>
+  </nav>
+
+  <code data-type="tpl"><?=hc('
+    <blockquote class="outer">
+      <div class="inner">
+        <p>Будь-яку теорію можна узгодити з будь-яким фактом!</p>
+      </div>
+    </blockquote>
+    ', 1)?>
+  </code>
+
+  <code data-type="less"><?=hc('
+    .outer {
+      position: relative;
+      display: block;
+      max-width: 320px;
+      margin: 50px auto 0;
+      padding: 20px 0;
+      background-color: #ffffff;
+      border: 1px solid #888888;
+      border-width: 1px 0;
+    }
+    
+    .inner {
+      position: relative;
+      padding: 0px 40px;
+      font-style: italic;
+      margin: 0 -20px;
+      background-color: #ff0;
+    
+      p {
+        font-size: 20px;
+        padding: 15px 5px;
+        margin: 0;
+      }
+    }
+    
+    .inner::before,
+    .inner::after,
+    .outer::before {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      width: 80px;
+      height: 80px;
+      border: 20px solid #000000;
+      border-color: #ffffff;
+      border-radius: 50%;
+      box-sizing: border-box;
+    }
+    
+    .inner::before {
+      bottom: -60px;
+      left: -40px;
+      clip: rect(auto, auto, 40px, 40px);
+    }
+    
+    .inner::after {
+      right: -40px;
+      bottom: -60px;
+      clip: rect(auto, 40px, 40px, auto);
+    }
+    
+    .outer::before {
+      top: -40px;
+      left: -60px;
+      clip: rect(40px, auto, auto, 40px);
+    }
+    
+    .outer::after {
+      content: "";
+      position: absolute;
+      top: -40px;
+      right: -60px;
+      z-index: 1;
+      width: 80px;
+      height: 80px;
+      border: 20px solid #000000;
+      border-color: #ffffff;
+      border-radius: 50%;
+      box-sizing: border-box;
+      clip: rect(40px, 40px, auto, auto);
+    }
+    ', 1)?>
+  </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-26.jpg" alt="section-26">
+  </code>
+</section>
+
 <svg width="310" height="290">
   <ellipse cx="150" cy="270" rx="75" ry="20" fill="lightgray"/>
 
