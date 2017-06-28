@@ -2486,6 +2486,112 @@
   </code>
 </section>
 
+<section data-section="27">
+  <nav>
+    <h2>Візуальний HTML редактор коду - CKEditor</h2>
+    <ul>
+      <li>Api</li>
+      <li>Tpl</li>
+      <li>Config</li>
+      <li>Example</li>
+    </ul>
+    <div class="num-section">27</div>
+  </nav>
+
+  <code data-type="api" class="hljs less"><?=hc('
+      API      |   http://docs.ckeditor.com/#!/api/CKEDITOR.config  |   Документація
+      Plugins  |   http://ckeditor.com/addons/plugins/all           |   Додаткові плагіни які можна дозавантажувати
+      Install  |   http://ckeditor.com/builder                      |   Сторінка де можна сформувати редактор коду та скачати його
+      
+      Щоб встановити додатковий плагін, необхідно:
+      1. Скачати його, та помістити у директорію: .../ckeditor/plugins/
+      2. У файлі - config.js - підключити плагін
+      ', 1)?>
+  </code>
+
+  <code data-type="tpl"><?=hc('
+    <script src="/skins/js/ckeditor/ckeditor.js" defer></script>
+    
+    <textarea name="<?=$arParams["TEXT_CODE"]?>" id="<?=$arParams["TEXT_CODE"]?>" rows="10" cols="80"><?=$arParams["TEXT"]?></textarea>
+    
+    <script>
+        CKEDITOR.replace(\'<?=$arParams["TEXT_CODE"]?>\');
+    </script>
+    ', 1)?>
+  </code>
+
+  <code data-type="config" class="hljs less"><?=hc("
+    /* Приклад файлу - config.js */
+     
+    CKEDITOR.editorConfig = function (config) {
+     
+        /* Формуємо вивід кнопок у панелі інструментів, так як нам потрібно */
+        /* '/' - Переводить на наступний рядок групу кнопок */
+         
+        config.toolbarGroups = [
+            {name : 'links'},
+            {name : 'styles'},
+            {name : 'insert'},
+            {name : 'forms'},
+            {name : 'tools'},
+            '/',
+            {
+              name   : 'document',
+              groups : ['mode', 'document', 'doctools']
+            },
+            {name : 'others'},
+            {
+              name   : 'basicstyles',
+              groups : ['basicstyles', 'cleanup']
+            },
+            {
+              name   : 'paragraph',
+              groups : ['list', 'indent', 'blocks', 'align', 'bidi']
+            },
+            {name : 'colors'},
+            {name : 'about'}
+        ];
+      
+        /* Вилучення деяких кнопок із панелі інструменів */
+         
+        config.removeButtons = \"Save,NewPage,DocProps,Preview,Print,Templates,document,Cut,Copy,Paste,PasteText,PasteFromWord,Undo,Redo,Find,
+            Replace,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Italic,Underline,Strike,Subscript,
+            Superscript,RemoveFormat,Outdent,Blockquote,CreateDiv,Unlink,Anchor,CreatePlaceholder,Flash,Smiley,SpecialChar,PageBreak,Iframe,
+            InsertPre,Styles,Format,Font,Maximize,ShowBlocks,button1,button2,button3,oembed,MediaEmbed,About\";
+        
+        /* Встановлення додаткових плагінів */
+       
+        config.extraPlugins = 'justify,font,uploadimage,youtube';
+      
+        /* Встановлення мови користувальницького інтерфейсу */
+       
+        config.defaultLanguage = 'ru';
+      
+        /* Вилучення закладок із вспливаючих вікон у функціоналі деяких кнопок */
+      
+        config.removeDialogTabs = 'image:advanced;image:Link;image:Upload;link:advanced;link:target;link:upload;';
+        
+        /* Встановлення найбільш поширеніших HTML тегів */
+         
+        config.format_tags = 'p;h1;h2;h3;pre';
+        
+        /* Приклади додаткових налаштування у відповідних плагінах редактора */
+         
+        config.youtube_autoplay = false;
+        config.youtube_controls = false;
+        
+        config.uploadUrl            = '/ajax/admin-edit-query.php?action=editor&mode=2';
+        config.imageUploadUrl       = '/ajax/admin-edit-query.php?action=editor&mode=2';
+        config.filebrowserUploadUrl = '/ajax/admin-edit-query.php?action=editor&mode=2';
+    };
+    ", 1)?>
+  </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-27.jpg" alt="section-27">
+  </code>
+</section>
+
 <svg width="310" height="290">
   <ellipse cx="150" cy="270" rx="75" ry="20" fill="lightgray"/>
 
