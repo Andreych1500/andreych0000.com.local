@@ -2592,6 +2592,52 @@
   </code>
 </section>
 
+<section data-section="28">
+  <nav>
+    <h2>Ефект лупи при наведенні на зображення - Jquery Zoom Elevate</h2>
+    <ul>
+      <li>Api</li>
+      <li>Tpl</li>
+      <li>JS</li>
+      <li>Example</li>
+    </ul>
+    <div class="num-section">28</div>
+  </nav>
+
+  <code data-type="api" class="hljs less"><?=hc('
+      API        |   http://www.elevateweb.co.uk/image-zoom/configuration   |   Документація по налаштуваннях
+      EXAMPLES   |   http://www.elevateweb.co.uk/image-zoom/examples        |   Різні приклади
+      
+      Важливо! Необхідно дотримуватись двох правил:
+      1. Ефект найкраще працює з використанням двох зображень, одного меньшого, і другого більшого.
+      2. Переконатися, що меньше зображення пропорційно зменшено з більшим.
+      ', 1)?>
+  </code>
+
+  <code data-type="tpl"><?=hc('
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/skins/js/jquery.elevatezoom.js"></script>
+    
+    <img id="zoom_01" src="/upload/small.jpg" data-zoom-image="/upload/big.jpg">
+    ', 1)?>
+  </code>
+
+  <code data-type="js"><?=hc('
+    $("#zoom_01").elevateZoom({
+        zoomType: "inner",
+        cursor: "crosshair",
+        zoomWindowFadeIn: 500,
+        zoomWindowFadeOut: 750
+    });
+    ', 1)?>
+  </code>
+
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-28.jpg" alt="section-28">
+  </code>
+</section>
+
 <svg width="310" height="290">
   <ellipse cx="150" cy="270" rx="75" ry="20" fill="lightgray"/>
 
