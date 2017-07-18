@@ -1501,7 +1501,7 @@
 
 <section data-section="17">
   <nav>
-    <h2>PayPal оплата</h2>
+    <h2>Платіжна система - PayPal</h2>
     <ul>
       <li>Api</li>
       <li>Php1</li>
@@ -2635,6 +2635,225 @@
 
   <code data-type="example">
     <img src="/skins/img/section/section-28.jpg" alt="section-28">
+  </code>
+</section>
+
+<section data-section="29">
+  <nav>
+    <h2>Платіжна система - ROBOKASSA</h2>
+    <ul>
+      <li>Api</li>
+      <li>Doc</li>
+      <li>Fail</li>
+      <li>Success</li>
+      <li>Result</li>
+    </ul>
+    <div class="num-section">29</div>
+  </nav>
+
+  <code data-type="api" class="hljs less"><?=hc('
+  ===== Підключення платіжної системи - ROBOKASSA =====
+      
+      - Проходимо реєстрацію: https://partner.robokassa.ru/Reg/Register?culture=ru
+      
+      - Налаштовуємо для нового магазину *Способи виведення коштів*:
+          МЕНЮ -> Настройки -> Способи виведення коштів -> Добавляємо - QIWI Кошелек
+          
+      - Створюємо новий магазин (*Тестовий):
+          МЕНЮ -> Управління -> Мої магазини
+          
+          o Важливо! Після створення нового магазину для тестових відправок - АКТИВАЦІЮ МАГАЗИНА - уникаємо! 
+          o Інакше після активації редагувати дані магазину - буде НЕМОЖЛИВО.
+      
+      - Налаштовуємо технічні налаштування для магазину:
+          МЕНЮ -> Мої магазини -> Наш магазин -> Технічні налаштування -> Заповнюємо поля:
+          
+              ID магазина     |   Придуманий при створенні магазину
+              Алгоритм хеша   |   Вибираємо шифрування даних MD5
+              Паролі          |   Паролі не повинні співпадати з паролями технічних платежів!
+              ResultURL       |   Відправка сповіщення про успішні платежі в автоматичному режимі
+              SuccessURL      |   Перенаправлення на сторінку після успішного платежу
+              FailURL         |   Перенаправлення покупеця після неуспішного платежу, відмови від оплати
+              
+              Параметри проведення тестових платежів:
+              
+              Алгоритм хеша   |   Вибираємо шифрування даних MD5
+              Паролі          |   Паролі не повинні співпадати з паролями АКТИВОВАНОГО магазину!
+              
+          o Вносити зміни у розділ можна і після активації магазину!
+      
+      - Активація магазину:
+          МЕНЮ -> Управління -> Мої магазини -> Активація магазину
+          
+          o Активація впливає на реальну функціональність, а саме: зняття коштів, реальних платежів.
+          o Активацію магазина слід виконувати після завершення усіх тестових робіт які протистовані!
+          o Деактивувати магазин можна тільки за запитом до Служби Підтримки - ROBOKASSA!
+    ', 1)?>
+  </code>
+
+  <code data-type="doc" class="hljs less"><?=hc('
+  ===== Технічна частина =====
+  
+  
+  Для того, щоб виконувати оплату через сервіс - RoboKassa - формуємо дані на запит оплати. Самий простіший метод, це сформувати GET параметр:
+  
+ 
+  * - Обов\'язкові
+  
+  
+  *$mrh_login = "demo";         // MerchantLogin - ID магазину
+  *$mrh_pass1 = "password_1";   // Password#1. Важливо! Для тестуваня оплати підсталяємо тестові паролі
+  
+  
+  *$out_summ = "12.96";         // OutSum - Сума оплати
+   $out_summ_currency = "USD";  // OutSumCurrency - код іноземної валюти (USD, EUR, KZT). Cума оплати буде автоматично перераховно по курсу
+                                // Важливо! Параметр повинен бути включений у контрольну суму - SignatureValue: MerchantLogin:OutSum:InvId:OutSumCurrency:Password#1
+   
+  *$inv_desc = "User buy";      // InvDesc - опис замовлення. Максимальна довжина - 100 символів
+   $encoding = "utf-8";         // Encoding - кодування відповідає за коректність відображення тексту в змінній - $inv_desc
+   
+   $culture = "ru";             // Мова інтерфейсу при використанню оплати
+   
+   $inv_id = 0;   // InvID - Номер замовлення (1 - 2147483647). Повинен бути унікальним при кожній оплаті
+                  // Якщо параметр пустий або 0, то при оплаті йому автоматично буде присвоєно унікальне значення (не рекомендується)
+                  // Важливо! Параметр повинен бути включений у контрольну суму - SignatureValue: MerchantLogin:OutSum:InvId:Password#1
+                  
+                  
+   $in_curr = "BANKOCEAN3R";   // IncCurrLabel - спосіб оплати (VISA, QIWI і т.д.) при якій користувач автоматично попадає на сторінку оплати цього способу
+                               // Списки тип оплат: https://auth.robokassa.ru/Merchant/WebService/Service.asmx/GetCurrencies?MerchantLogin=demo&Language=ru
+                               
+   $email = "test@test.ru";   // Email - покупця. Користувач може змінити його в процесі оплати!
+   
+   
+   $shp_login = "Vasya";      // Додаткові параметри які будуть повертатися з результатом оплати!
+   $shp_name = "Вася";        // Важливо! Всі параметри повинні бути розсортовані в алфавітному порядку, наприклад: Shp_login=Vasya:Shp_name=Вася (l - n)
+                              // Параметри можуть бути включені у контрольну суму - SignatureValue: MerchantLogin:OutSum:InvId:Password#1:Shp_login=$shp_login:Shp_name=$shp_name
+ 
+   $isTest = 1;   // IsTest - для роботи в тестовому режимі
+   
+   Формування секретної контрольної суми:
+   $crc  = md5("$mrh_login:$out_summ:$inv_id:$mrh_pass1");
+   
+   o Важливо! Пароль#2 - використовується для тестування магазину інтерфейсом сповіщення про платіж. Приходить з результатом успішного платежу!
+   
+   Приклади формування рядків запиту:
+   https://auth.robokassa.ru/Merchant/Index.aspx?MrchLogin=$mrh_login&OutSum=$out_summ&InvId=$inv_id&IncCurrLabel=$in_curr&Desc=$inv_desc&SignatureValue=$crc&Shp_item=$shp_item&Culture=$culture&Encoding=$encoding
+   https://auth.robokassa.ru/Merchant/Index.aspx?MerchantLogin=$mrh_login&OutSum=$out_summ&InvoiceID=$inv_id&Description=$inv_desc&SignatureValue=$crc&IsTest=$IsTest	
+    }', 1)?>
+  </code>
+
+  <code data-type="fail" class="pre-wrap"><?=hc('       
+    fail.php - Сторінка для сповіщення користувача про те, що він відмовився від оплати!
+    
+    <?php if ($request->isPost() && $request->getPost("InvId") && $request->getPost("Shp_package") && $request->getPost("Shp_target")) {
+        <div>Вы отменили оплату!</div>
+    <?php } else { ?>
+        <div>Страница для оповещения отказа оплаты!</div>
+    <?php } ?>
+    ', 1)?>
+  </code>
+
+  <code data-type="success" class="pre-wrap"><?=hc('
+    success.php - Сторінка для сповіщення користувача про те, що операція оплати пройшла успішно!
+    
+    <?php if ($request->isPost() 
+    && $request->getPost("OutSum") 
+    && $request->getPost("InvId") 
+    && $request->getPost("Shp_package") 
+    && $request->getPost("Shp_target") 
+    && $request->getPost("SignatureValue")) { ?>
+        <div class="central-fixed-block align-center content--top-pad">
+          Операция прошла успешно!
+        </div>
+    <?php } else { ?>
+        <div>
+          Страница для оповещения успешной оплаты заказа!
+        </div>
+    <?php } ?>
+    ', 1)?>
+  </code>
+
+  <code data-type="result" class="pre-wrap"><?=hc('
+    use \Bitrix\Main\Application as Application;
+    use \Bitrix\Main\Config\Option as Option;
+    
+    $request = Application::getInstance()->getContext()->getRequest();
+    
+    /*
+     * Логируем все POST и GET данные!
+     */
+    ob_start();
+    print_r($request->getPostList());
+    $getPOST = ob_get_clean();
+    
+    ob_start();
+    print_r($request->getQueryList());
+    $getGET = ob_get_clean();
+    
+    /*
+        EXAMLE RESULT:
+        [out_summ] => 4100
+        [OutSum] => 4100
+        [inv_id] => 1
+        [InvId] => 1
+        [crc] => 3F842154C695364D980TESTD26D
+        [SignatureValue] => 3F842154C695364D980TESTD26D
+        [PaymentMethod] => eInvoicing
+        [IncSum] => 4387.00
+        [IncCurrLabel] => QCardR
+        [IsTest] => 1
+        [Shp_package] => сompetitor,food_program,training_program
+        [Shp_target] => SLIMMING
+    */
+    
+    if ($request->isPost()
+      && $request->getPost("OutSum")
+      && $request->getPost("InvId")
+      && $request->getPost("SignatureValue")
+      && $request->getPost("IncSum")
+      && $request->getPost("PaymentMethod")
+      && $request->getPost("IncCurrLabel")
+      && $request->getPost("Shp_package")
+      && $request->getPost("Shp_target")
+      && $request->getPost("Shp_id_user")) {
+      
+          if ($request->getPost("IsTest") == "1") {
+              $mrh_pass2 = Option::get("main", "TEST_PASSWORD_2");
+          } else {
+              $mrh_pass2 = Option::get("main", "PASSWORD_2");
+          }
+          
+          $out_summ = $request->getPost("OutSum");
+          $inv_id = $request->getPost("InvId");
+          $shp_id_user = $request->getPost("Shp_id_user");
+          $shp_package = $request->getPost("Shp_package");
+          $shp_target = $request->getPost("Shp_target");
+          $crc = strtoupper($request->getPost("SignatureValue"));
+          
+          $my_crc = strtoupper(md5("$out_summ:$inv_id:$mrh_pass2:Shp_id_user=$shp_id_user:Shp_package=$shp_package:Shp_target=$shp_target"));
+          
+          $crc = strtoupper($_REQUEST["SignatureValue"]);
+          
+          if ($my_crc != $crs) {
+              // ERROR
+          } else {
+              /*
+               * Увеличиваем константу покупки +1
+               */
+              $SITE_INV_ID = Option::get("main", "INV_ID", "1");
+              Option::set("main", "INV_ID", ++$SITE_INV_ID);
+          }
+          
+          // Признак успешно проведенной операции
+          // Больше отправок повторных сюда не будет!
+          echo "OK$inv_id\n";
+    } else {
+        file_put_contents("./log.txt", "\r\n=====\r\nFAILD STATUS! | ".date("Y-m-d H:i:s")." | IP: ".$request->getRemoteAddress()."\r\nPOST: $getPOST \r\nGET: $getGET=====\r\n", FILE_APPEND);
+    }', 1)?>
+  </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-29.jpg" alt="section-29">
   </code>
 </section>
 
