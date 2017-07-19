@@ -2858,6 +2858,42 @@
   </code>
 </section>
 
+<section data-section="30">
+  <nav>
+    <h2>Приклад нового сімейства рамок - border-image</h2>
+    <ul>
+      <li>Tpl</li>
+      <li>Less</li>
+      <li>Example</li>
+    </ul>
+    <div class="num-section">30</div>
+  </nav>
+
+  <code data-type="tpl"><?=hc('
+      <div class="picture"></div>
+  ', 1)?>
+  </code>
+
+  <code data-type="less" class="hljs less"><?=hc('
+    .picture {
+        .box-sizing(border-box);
+        .background-size(cover);
+        .background-image(url(./Ga4tIYs7rbE.jpg));
+        .background-clip(content-box);
+        background-position: 50%;
+        border: 50px solid rgba(0, 0, 0, 0.3);
+        border-image-source: url(./bant48.png); // Задаємо фонове зображення рамки
+        border-image-slice: 40 fill; // Відступи від країв картинки до чотирьох ліній. fill - середня частина зображення закриватиме собою фон блоку, але не вміст
+        border-image-repeat: stretch; // Спосіб заповнення фоном бічних сторін рамки - stretch, repeat, space і round
+        border-image-outset: 0 0 35px;
+    }', 1)?>
+  </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-30.jpg" alt="section-30">
+  </code>
+</section>
+
 <svg width="310" height="290">
   <ellipse cx="150" cy="270" rx="75" ry="20" fill="lightgray"/>
 
