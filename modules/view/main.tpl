@@ -2894,6 +2894,125 @@
   </code>
 </section>
 
+<section data-section="31">
+  <nav>
+    <h2>Вертикальне вирівнювання блоків в одну лінію</h2>
+    <ul>
+      <li>Tpl</li>
+      <li>Less</li>
+      <li>Example</li>
+    </ul>
+    <div class="num-section">31</div>
+  </nav>
+
+  <code data-type="tpl" class="pre-wrap"><?=hc('
+    <div class="container">
+      <div class="left">
+        В левой колонке текст одной длины, а в правой колонке — другой. Так как соседние блоки не могут знать о высоте друг друга, то и выровнять их по высоте не получится. Это недостаток блочной модели.В левой колонке текст одной длины, а в правой колонке — другой. В левой колонке текст одной длины, а в правой колонке — другой. Так как соседние блоки не могут знать о высоте друг друга, то и выровнять их по высоте не получится. Это недостаток блочной модели.В левой колонке текст одной длины, а в правой колонке — другой.
+      </div>
+      <div class="right">
+        Но можно подложить под них фон, того же цвета, что и их собственный, чтобы создалась иллюзия, что колонки одинаковые.
+      </div>
+    </div>
+  ', 1)?>
+  </code>
+
+  <code data-type="less" class="hljs less"><?=hc('
+    .container {
+      width: 350px;
+      margin: 20px auto;
+      color: white;
+      .box-shadow(1px 1px 3px #333333);
+      background-image: linear-gradient(to right, #e74c3c 45%, transparent 45%, transparent 55%, #3498db 55%);
+    }
+    
+    .container:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+      
+    .container div {
+      padding: 20px;
+      .box-sizing(border-box);
+    }
+      
+    .left {
+      float: left;
+      width: 45%;
+      background-color: #e74c3c;
+    }
+      
+    .right {
+      float: right;
+      width: 45%;
+      background-color: #3498db;
+    }', 1)?>
+  </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-31.jpg" alt="section-31">
+  </code>
+</section>
+
+<section data-section="32">
+  <nav>
+    <h2>Візуальний ефект хвиль - CSS</h2>
+    <ul>
+      <li>Tpl</li>
+      <li>Less</li>
+      <li>Example</li>
+    </ul>
+    <div class="num-section">32</div>
+  </nav>
+
+  <code data-type="tpl" class="pre-wrap"><?=hc('
+    <div class="wav"></div>
+  ', 1)?>
+  </code>
+
+  <code data-type="less" class="hljs less"><?=hc('
+    .wave{
+      height: 50px;
+      position: relative;
+      width: 550px;
+      margin: 0 auto;
+      filter: drop-shadow(0px -3px 3px #ccc);
+    }
+    
+    .wave::before{
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background-repeat: repeat;
+      height: 20px;
+      background-position: 0px -40px;
+      background-size: 100px 70px;
+      background-image: radial-gradient(circle at 30px 8px, transparent 45px, #3fff00 0);
+    }
+    
+    .wave::after{
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background-repeat: repeat-x;
+      height: 110px;
+      background-position: 30px 70px;
+      background-size: 100px 30px;
+      background-image: radial-gradient(circle at 50px 50px, #3fff00 35px, transparent 0);
+    }
+    ', 1)?>
+  </code>
+
+  <code data-type="example">
+    <img src="/skins/img/section/section-32.jpg" alt="section-32">
+  </code>
+</section>
+
 <svg width="310" height="290">
   <ellipse cx="150" cy="270" rx="75" ry="20" fill="lightgray"/>
 
